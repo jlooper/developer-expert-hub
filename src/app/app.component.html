@@ -1,3 +1,34 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-default navbar-fixed-top">
+            
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="container">
+        <span *ngIf="af.auth | async">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-item button"><a routerLink="/dashboard/profile">Profile</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/account">Account</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/settings">Settings</a></li>
+            </ul>
+        </span>
+
+        <span *ngIf="!(af.auth | async)">
+            <a class="navbar-brand" href="/"><img src="/assets/img/logo.png"></a>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-item button"><a routerLink="/login">Login</a></li>
+                    <li class="navbar-item button"><a routerLink="/signup">Join</a></li>
+            </ul>
+        </span>
+    </div>
+
+</div>
+
+</nav>
+
+    <router-outlet></router-outlet>
+
+<div class="menu-centered">
+    <ul class="menu">
+        <li *ngIf="af.auth | async">LOGGED IN</li>
+        <li *ngIf="!(af.auth | async)">NOT LOGGED IN</li>
+    </ul>
+</div>
