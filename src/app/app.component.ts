@@ -8,7 +8,23 @@ import { Router } from '@angular/router';
 })
 export class AppComponent { 
   constructor(private af: AngularFire, private router: Router) {
-    // this.af.auth.subscribe(auth => console.log(auth));
+    const user = this.af.auth.subscribe(
+      auth => this.getUser(auth)
+    );
+  }
+
+  getUser(auth){
+    const queryObservable = this.af.database.list('/Profile', {
+    query: {
+      orderByChild: 'uid',
+      equalTo: auth.uid 
+    }
+   });
+
+   queryObservable.subscribe(queriedItems => {
+      console.log(queriedItems);  
+   });
+
   }
 
   logout() {

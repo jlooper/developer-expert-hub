@@ -11,7 +11,26 @@ import { AngularFire, AngularFireAuth } from 'angularfire2';
 export class SignupComponent {
   public error: any;
 
-  constructor(private af: AngularFire, private router: Router) {  }
+ constructor(private af: AngularFire, private router: Router) {
+    const user = this.af.auth.subscribe(
+      auth => this.getUser(auth)
+    );
+  }
+
+  getUser(auth){
+    const queryObservable = this.af.database.list('/Profile', {
+    query: {
+      orderByChild: 'uid',
+      equalTo: auth.uid 
+    }
+   });
+
+   queryObservable.subscribe(queriedItems => {
+      console.log(queriedItems);
+        
+   });
+
+  }
 
   onSubmit(formData) {
     if(formData.valid) {
@@ -21,21 +40,7 @@ export class SignupComponent {
         password: formData.value.password
       }).then(
         (success) => {
-          
             this.createUserProfile(success.uid)
-          
-            this.af.auth.login({
-              email: formData.value.email,
-              password: formData.value.password
-            }).then(
-              (success) => {
-              console.log(success);
-              this.router.navigate(['/dashboard']);
-            }).catch(
-              (err) => {
-              console.log(err);
-              this.router.navigate(['/dashboard']);
-            })
       }).catch(
         (err) => {
         alert(err);
@@ -48,7 +53,15 @@ export class SignupComponent {
 
   createUserProfile(uid){
     const data = this.af.database.list('/Profile')
-    data.push({ uid: uid })
+      data.push({ uid: uid, verified: false })
+    .then(
+        (success) => {
+        console.log(success);
+        this.router.navigate(['/success']);
+      }).catch(
+        (err) => {
+        alert(err.message);
+      })
   }
 }
 
@@ -73,8 +86,8 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       }).catch(
         (err) => {
-        console.log(err);
-        this.router.navigate(['/dashboard']);
+        alert(err.message);
+        //this.router.navigate(['/dashboard']);
       })
     } else {
       this.error = 'Your form is invalid';
@@ -95,3 +108,9 @@ export class ResetpassComponent {
      }
   }
 }
+
+@Component({
+  templateUrl: 'success.component.html'
+})
+
+export class SuccessComponent {}

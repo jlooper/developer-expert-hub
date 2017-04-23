@@ -4,6 +4,38 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+
+input,
+button {
+  outline: 0;
+}
+input[type=text],
+input[type=email],
+input[type=number],
+input[type=password] {
+  border: none;
+  background: #fff;
+  font-size: 13px;
+  padding: 6px 30px 6px 10px;
+  border-radius: 1px;
+  border: 1px solid #ccc;
+}
+label {
+  display: block;
+}
+
+input[type="text"] {
+  display: block;
+  border: none;
+  background: #fff;
+  font-size: 15px;
+  padding: 6px 30px 6px 10px;
+  border-radius: 1px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  width: 100%;
+}
+
 @font-face {
   font-family: 'Fakt Slab Pro Light';
   src: url('../fonts/faktslabpro-light-webfont.ttf');
@@ -303,6 +335,14 @@ section.success {
     #portfolio .portfolio-item {
         margin: 0 0 30px;
     }
+}
+
+.link {
+    padding-top: 15px;
+}
+
+.btn-primary{
+    width: 100%;
 }
 
 .btn-outline {
