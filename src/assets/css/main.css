@@ -5,7 +5,7 @@
  */
 
 
-input,
+/*input,
 button {
   outline: 0;
 }
@@ -49,7 +49,7 @@ input[type="text"] {
   font-weight: normal;
   font-style: normal;
 }
-
+*/
 
 body {
     overflow-x: hidden;
@@ -58,13 +58,6 @@ body {
 .navbar-brand{
     padding: 0;
 }
-
-.card {
-    background-color: lightgray;
-    border-radius: 5px;
-    padding: 10px;
-}
-
 p,.copy {
     font-size: 20px;
 }
@@ -86,7 +79,7 @@ a:focus,
 a:active,
 a.active {
     outline: 0;
-    color: #F3431F;
+    color: #A1A6B4;
 }
 
 h1,
@@ -105,47 +98,9 @@ h2 {
 }
 
 h3.title{
-    color: #650100;
+    color: #B4D2E7;
 }
 
-hr.star-light,
-hr.star-primary {
-    margin: 25px auto 30px;
-    padding: 0;
-    max-width: 250px;
-    border: 0;
-    border-top: solid 5px;
-    text-align: center;
-}
-
-hr.star-light:after,
-hr.star-primary:after {
-    content: "\f005";
-    display: inline-block;
-    position: relative;
-    top: -.8em;
-    padding: 0 .25em;
-    font-family: FontAwesome;
-    font-size: 2em;
-}
-
-hr.star-light {
-    border-color: #fff;
-}
-
-hr.star-light:after {
-    color: #fff;
-    background-color: #F3431F;
-}
-
-hr.star-primary {
-    border-color: #F3431F;
-}
-
-hr.star-primary:after {
-    color: #F3431F;
-    background-color: #fff;
-}
 
 .img-centered {
     margin: 0 auto;
@@ -154,7 +109,7 @@ hr.star-primary:after {
 header {
     text-align: center;
     color: #fff;
-    background: #F3431F;
+    background: #A1A6B4;
 }
 
 header .container {
@@ -217,6 +172,7 @@ header .intro-text .skills {
 
 .navbar {
     text-transform: uppercase;
+    background: #000100;
     font-family: "Fakt Slab Pro Light",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
@@ -235,14 +191,15 @@ header .intro-text .skills {
 
 .navbar-default,
 .navbar-inverse {
-    border: 1 solid gray;
+    border: 1 solid #000100
+    ;
 }
 
 section {
     padding: 40px 0px;
 }
 
-#page {
+#page, #portfolio {
     padding-top: 120px;
 }
 
@@ -256,7 +213,7 @@ section {
 }
 
 .list-group-item-heading {
-    color: #F3431F;
+    color: #5CB85C;
     padding: 5px;
     margin: 10px;
 }
@@ -266,8 +223,8 @@ section h2 {
 }
 
 section.success {
-    color: #fff;
-    background: #F3431F;
+    color: #F8F8F8;
+    background: #5CB85C;
 }
 
 @media(max-width:767px) {
@@ -297,7 +254,7 @@ section.success {
     width: 100%;
     height: 100%;
     opacity: 0;
-    background: rgba(247,136,34,.9);
+    background: rgba(161,166,180,.9);
     -webkit-transition: all ease .5s;
     -moz-transition: all ease .5s;
     transition: all ease .5s;
@@ -345,23 +302,6 @@ section.success {
     width: 100%;
 }
 
-.btn-outline {
-    margin-top: 15px;
-    border: solid 2px #fff;
-    font-size: 20px;
-    color: #fff;
-    background: 0 0;
-    transition: all .3s ease-in-out;
-}
-
-.btn-outline:hover,
-.btn-outline:focus,
-.btn-outline:active,
-.btn-outline.active {
-    border: solid 2px #fff;
-    color: #F3431F;
-    background: #fff;
-}
 
 .floating-label-form-group {
     position: relative;
@@ -429,7 +369,7 @@ footer h3 {
 
 footer .footer-above {
     padding-top: 50px;
-    background-color: #8AC215;
+    background-color: #5CB85C;
 }
 
 footer .footer-col {
@@ -438,7 +378,7 @@ footer .footer-col {
 
 footer .footer-below {
     padding: 25px 0;
-    background-color: #650100;
+    background-color: #5CB85C;
 }
 
 .btn-social {
@@ -479,7 +419,7 @@ footer .footer-below {
     outline: 0;
 }
 
-.portfolio-modal .modal-content {
+/*.portfolio-modal .modal-content {
     padding: 100px 0;
     min-height: 100%;
     border: 0;
@@ -536,4 +476,4 @@ footer .footer-below {
     -webkit-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
-}
+}*/

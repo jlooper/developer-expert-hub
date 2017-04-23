@@ -13,6 +13,8 @@ export class AppComponent {
     );
   }
 
+  member = false;
+
   getUser(auth){
     const queryObservable = this.af.database.list('/Profile', {
     query: {
@@ -22,7 +24,8 @@ export class AppComponent {
    });
 
    queryObservable.subscribe(queriedItems => {
-      console.log(queriedItems);  
+      console.log(queriedItems);
+      this.member = queriedItems[0].member;  
    });
 
   }

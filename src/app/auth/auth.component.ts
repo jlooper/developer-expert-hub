@@ -53,7 +53,7 @@ export class SignupComponent {
 
   createUserProfile(uid){
     const data = this.af.database.list('/Profile')
-      data.push({ uid: uid, verified: false })
+      data.push({ uid: uid, member: false })
     .then(
         (success) => {
         console.log(success);
