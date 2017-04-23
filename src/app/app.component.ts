@@ -14,6 +14,8 @@ export class AppComponent {
   }
 
   member = false;
+  environment = window.location.hostname;
+  
 
   getUser(auth){
     const queryObservable = this.af.database.list('/Profile', {

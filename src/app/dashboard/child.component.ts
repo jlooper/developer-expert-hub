@@ -36,7 +36,7 @@ export class AccountComponent {
 
 @Component({
   selector: 'profile',
-  templateUrl: 'settings.component.html'
+  templateUrl: 'activities.component.html'
 })
 
-export class SettingsComponent { }
+export class ActivitiesComponent { }

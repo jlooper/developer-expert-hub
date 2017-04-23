@@ -2,17 +2,19 @@
             
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <div class="container">
+        
+        <a class="navbar-brand" href="/"><img src="/assets/img/logo.png"></a>
+
         <span *ngIf="(af.auth | async) && member">
             <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-item button"><a routerLink="/dashboard/profile">Profile</a></li>
-                <li class="navbar-item button"><a routerLink="/dashboard/account">Account</a></li>
-                <li class="navbar-item button"><a routerLink="/dashboard/settings">Settings</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/profile">My Profile</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/account">My Account</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/activities">My Activities</a></li>
             </ul>
         </span>
-
+        <!--if not logged in and not a member-->
         <span *ngIf="!(af.auth | async) || !member">
-            <a class="navbar-brand" href="/"><img src="/assets/img/logo.png"></a>
-
+            
             <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-item button"><a routerLink="/login">Login</a></li>
                     <li class="navbar-item button"><a routerLink="/signup">Join</a></li>
@@ -26,12 +28,12 @@
 
     <router-outlet></router-outlet>
 
-<!--<div class="menu-centered">
+<div *ngIf="this.environment == '127.0.0.1'" class="menu-centered">
     <ul class="menu">
         <li *ngIf="af.auth | async">LOGGED IN</li>
         <li *ngIf="!(af.auth | async)">NOT LOGGED IN</li>
     </ul>
-</div>-->
+</div>
 
 <!-- Footer -->
     <footer class="text-center">
