@@ -1,19 +1,26 @@
-<div class="small-12 medium-8 medium-centered large-6 large-centered columns">
-    <h3>Profile Page</h3> 
-    Below is the JSON data of the currently logged in User, but in summary: 
-    <div *ngIf="!userData" class="callout alert">
-      <p class="lead">
-        No Data available
-      </p>
+<section id="page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>My Profile</h2>
+            </div>
+        </div>
+        <div class="row">    
+          <div *ngIf="!userData" class="callout alert">
+            <p class="lead">
+              No Data available
+            </p>
+          </div>
+          <div *ngIf="userData">
+            <p>
+              Email: {{ userData.auth.email }} <br>
+              DisplayName: {{ userData.auth.displayName }} <br>
+              Verification: {{ userData.auth.emailVerified}} <br>
+              Login Means: {{ userData.auth.providerData | json }}
+            </p>
+            <hr>
+            {{ userData | json }}
+          </div>
+      </div>
     </div>
-    <div *ngIf="userData">
-    <p>
-      Email: {{ userData.auth.email }} <br>
-      DisplayName: {{ userData.auth.displayName }} <br>
-      Verification: {{ userData.auth.emailVerified}} <br>
-      Login Means: {{ userData.auth.providerData | json }}
-    </p>
-    <hr>
-    {{ userData | json }}
-    </div>
-</div>
+  </section>
