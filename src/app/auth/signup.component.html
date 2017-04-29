@@ -15,39 +15,66 @@
 
                     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
 
-                        <div class="form-group">
-                            <label> First Name: </label>
-                            <input name="fname" class="form-control" (ngModel)="fname" required>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" (ngModel)="fname" placeholder="First Name" id="fname" name="fname" required data-validation-required-message="First Name is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label> Last Name: </label>
-                            <input name="lname" class="form-control" (ngModel)="lname" required>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control" (ngModel)="lname" placeholder="Last Name" id="lname" name="lname" required data-validation-required-message="Last Name is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label> Email: </label>
-                            <input name="email" class="form-control" (ngModel)="email" required>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" (ngModel)="email" placeholder="Email" id="email" name="email" required data-validation-required-message="Email is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label> Choose a Password: </label>
-                            <input name="password" class="form-control" (ngModel)="password" required>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="password">Choose a Password</label>
+                                <input type="password" class="form-control" (ngModel)="password" placeholder="Password" id="password" name="password" required data-validation-required-message="Password is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label> Bio: </label>
-                            <textarea hint="Tell me why you are a good fit for the program" class="form-control" rows="5" name="bio" (ngModel)="bio" required></textarea>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="bio">Bio</label>
+                                <textarea rows="5" class="form-control" (ngModel)="bio" placeholder="Bio" id="bio" name="bio" required data-validation-required-message="Bio is required."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
+                                           
+                        <div class="row control-group">
                         <h3>Progress Product Expertise</h3>
-                            <input type="checkbox" value="kendoui" (ngModel)="expertise">
-                            <label> Kendo UI</label>
-                            <br/>
-                            <input type="checkbox" value="nativescript" (ngModel)="expertise">
-                            <label> NativeScript </label>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Sitefinity" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">Sitefinity</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Kendo UI" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">Kendo UI</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="NativeScript" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">NativeScript</label>
+                                </div>               
                         </div>
+
+                         <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="image">Your Photo</label>
+                                <input id="image" name="image" type="file" (ngModel)="image" (change)="fileChange($event)" placeholder="Upload file" accept=".png,.jpg">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>                          
                         
                         <div>
                             <button type="submit" class="btn btn-primary" [disabled]="!formData.valid">Submit</button>

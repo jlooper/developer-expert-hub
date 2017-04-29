@@ -18,17 +18,20 @@ export class AppComponent {
   
 
   getUser(auth){
-    const queryObservable = this.af.database.list('/Profile', {
-    query: {
-      orderByChild: 'uid',
-      equalTo: auth.uid 
-    }
+    if (auth != null) {
+      const queryObservable = this.af.database.list('/Profile', {
+      query: {
+        orderByChild: 'uid',
+        equalTo: auth.uid 
+      }
    });
 
-   queryObservable.subscribe(queriedItems => {
-      console.log(queriedItems);
-      this.member = queriedItems[0].member;  
-   });
+    queryObservable.subscribe(queriedItems => {
+        console.log(queriedItems);
+        this.member = queriedItems[0].member;  
+    });
+    
+  }
 
   }
 
