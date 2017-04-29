@@ -240,6 +240,23 @@ section.success {
 #portfolio .portfolio-item {
     right: 0;
     margin: 0 0 15px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+}
+
+#portfolio .title {
+    font-weight: bold;
+    font-size: 20;
+}
+
+#portfolio .portfolio-image{
+    border-radius: 50%;
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
 }
 
 #portfolio .portfolio-item .portfolio-link {
@@ -290,7 +307,7 @@ section.success {
 
 @media(min-width:767px) {
     #portfolio .portfolio-item {
-        margin: 0 0 30px;
+        margin: 10px;
     }
 }
 
