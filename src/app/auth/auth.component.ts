@@ -70,7 +70,7 @@ export class SignupComponent {
         password: formData.value.password        
       }).then(
         (success) => {
-            this.createUserProfile(success.uid,formData.value.fname,formData.value.lname,formData.value.bio,this.expertise)
+            this.createUserProfile(success.uid,formData.value.fname,formData.value.lname,formData.value.title,formData.value.company,formData.value.bio,this.expertise)
       }).catch(
         (err) => {
         this.error = err.message;
@@ -80,9 +80,9 @@ export class SignupComponent {
     }
   }
 
-  createUserProfile(uid,fname,lname,bio,expertise){
+  createUserProfile(uid,fname,lname,title,company,bio,expertise){
     const data = this.af.database.list('/Profile')
-      data.push({ uid: uid, fname: fname, lname: lname, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false })
+      data.push({ uid: uid, fname: fname, lname: lname, title: title, company: company, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false })
     .then(
         (success) => {
         console.log(success);
