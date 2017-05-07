@@ -5,7 +5,7 @@
         
         <a class="navbar-brand" href="/"><img src="/assets/img/logo.png"></a>
 
-        <span *ngIf="(af.auth | async) && member">
+        <span *ngIf="(user | async) && member">
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-item button"><a routerLink="/dashboard/profile">My Profile</a></li>
                 <li class="navbar-item button"><a routerLink="/dashboard/account">My Account</a></li>
@@ -13,7 +13,7 @@
             </ul>
         </span>
         <!--if not logged in and not a member-->
-        <span *ngIf="!(af.auth | async) || !member">
+        <span *ngIf="!(user | async) || !member">
             
             <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-item button"><a routerLink="/login">Login</a></li>
@@ -30,8 +30,8 @@
 
 <div *ngIf="this.environment == '127.0.0.1'" class="menu-centered">
     <ul class="menu">
-        <li *ngIf="af.auth | async">LOGGED IN</li>
-        <li *ngIf="!(af.auth | async)">NOT LOGGED IN</li>
+        <li *ngIf="user | async">LOGGED IN</li>
+        <li *ngIf="!(user | async)">NOT LOGGED IN</li>
     </ul>
 </div>
 

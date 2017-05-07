@@ -1,17 +1,25 @@
 import { Component } from '@angular/core';
-import { AngularFire } from 'angularfire2'
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Router } from '@angular/router';
+import {Observable} from 'rxjs/observable';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'root-app',
   templateUrl: 'app.component.html'
 })
 export class AppComponent { 
-  constructor(private af: AngularFire, private router: Router) {
-    const user = this.af.auth.subscribe(
+  /*constructor(af: AngularFireModule, db: AngularFireDatabaseModule, auth: AngularFireAuthModule, private router: Router) {
+    const user = auth.subscribe(
       auth => this.getUser(auth)
     );
-  }
+}*/
+user: Observable<firebase.User>;
+constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private router: Router) {
+  this.user = afAuth.authState;
+}
 
   member = false;
   environment = window.location.hostname;
@@ -19,7 +27,7 @@ export class AppComponent {
 
   getUser(auth){
     if (auth != null) {
-      const queryObservable = this.af.database.list('/Profile', {
+      const queryObservable = this.db.list('/Profile', {
       query: {
         orderByChild: 'uid',
         equalTo: auth.uid 
@@ -36,7 +44,7 @@ export class AppComponent {
   }
 
   logout() {
-    this.af.auth.logout();
+    this.afAuth.auth.signOut();
     this.router.navigate(['/'])
   }
 }

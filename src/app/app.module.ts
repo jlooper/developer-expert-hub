@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { AppComponent, PageNotFoundComponent } from './app.component';
-
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 
 import { AuthModule } from './auth/auth.module';
 import { DashModule } from './dashboard/dashboard.module';
@@ -25,22 +25,17 @@ export const config = {
     storageBucket: "developer-expert-hub.appspot.com",
     messagingSenderId: "481924833661"
 };
-
-const myFirebaseAuthConfig = {
-  provider: AuthProviders.Google,
-  method: AuthMethods.Redirect
-};
-
-export const firebaseAuthConfig = {
+/*export const firebaseAuthConfig = {
   provider: AuthProviders.Password,
   method: AuthMethods.Password
-}
+}*/
 
 @NgModule({
   imports:      [ 
     BrowserModule,
-    AngularFireModule.initializeApp(config, firebaseAuthConfig),
-    AuthModule,
+    AngularFireModule.initializeApp(config, 'root-app'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     DashModule,
     AppRouting,
     CommonModule
@@ -51,6 +46,6 @@ export const firebaseAuthConfig = {
     PageNotFoundComponent
   ],
   providers: [],
-  bootstrap:    [ AppComponent ]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

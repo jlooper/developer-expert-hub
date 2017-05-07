@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AngularFire, FirebaseListObservable} from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import {DomSanitizer} from '@angular/platform-browser';
 
 
@@ -10,15 +10,15 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 
 export class HomeComponent implements OnInit {
-  items: FirebaseListObservable<any[]>;
+ items: FirebaseListObservable<any[]>;
 
   cleanedImage: any;
   private sub:any;
 
-  constructor(private af: AngularFire, private sanitizer: DomSanitizer, private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(private db: AngularFireDatabase, private sanitizer: DomSanitizer, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(){
-    this.items = this.af.database.list('/Profile', {
+    this.items = this.db.list('/Profile', {
       query: {
         orderByChild: 'member',
         equalTo: true

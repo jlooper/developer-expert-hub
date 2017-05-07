@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/observable';
 
 @Component({
   selector: 'profile',
@@ -7,16 +8,13 @@ import { AngularFire } from 'angularfire2';
 })
 
 export class ProfileComponent { 
-    public userData: any;
-    constructor(private af: AngularFire) {  }
+    
+    user: Observable<firebase.User>;
 
-    ngOnInit() {
-        this.af.auth.subscribe(auth => {
-          console.log(auth);
-          this.userData = auth;
-        });
+    constructor(private afAuth: AngularFireAuth) {
+      this.user = afAuth.authState;
     }
-
+    
 }
 
 @Component({

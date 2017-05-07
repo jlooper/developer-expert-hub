@@ -1,7 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from "firebase";
-import { AngularFire, AngularFireAuth } from 'angularfire2';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/observable';
 
 @Component({
   templateUrl: 'signup.component.html'
@@ -12,16 +15,15 @@ export class SignupComponent {
   public error: any;
   public expertise: any = [];
 
- constructor(private af: AngularFire, private router: Router) {
-    const user = this.af.auth.subscribe(
-      auth => this.getUser(auth)
-    );
+user: Observable<firebase.User>;
+ constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
+    this.user = afAuth.authState;
   }
 
   getUser(auth){
     console.log(auth)
     if (auth) {
-        const queryObservable = this.af.database.list('/Profile', {
+        const queryObservable = this.db.list('/Profile', {
         query: {
           orderByChild: 'uid',
           equalTo: auth.uid 
@@ -65,10 +67,9 @@ export class SignupComponent {
 
   onSubmit(formData) {
     if(formData.valid) {
-      this.af.auth.createUser({
-        email: formData.value.email,
-        password: formData.value.password        
-      }).then(
+      this.afAuth.auth.createUserWithEmailAndPassword(
+        formData.value.email,formData.value.password        
+      ).then(
         (success) => {
             this.createUserProfile(success.uid,formData.value.fname,formData.value.lname,formData.value.title,formData.value.company,formData.value.bio,this.expertise)
       }).catch(
@@ -81,7 +82,7 @@ export class SignupComponent {
   }
 
   createUserProfile(uid,fname,lname,title,company,bio,expertise){
-    const data = this.af.database.list('/Profile')
+    const data = this.db.list('/Profile')
       data.push({ uid: uid, fname: fname, lname: lname, title: title, company: company, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false })
     .then(
         (success) => {
@@ -101,16 +102,16 @@ export class SignupComponent {
 export class LoginComponent {
   public error: any;
 
-  constructor(private af: AngularFire, private router: Router) { }
+  constructor(private afAuth: AngularFireAuth, private router: Router) { }
 
   onSubmit(formData) {
         
     if(formData.valid) {
       console.log(formData.value);
-      this.af.auth.login({
-        email: formData.value.email,
-        password: formData.value.password
-      }).then(
+      this.afAuth.auth.signInWithEmailAndPassword(
+        formData.value.email,
+        formData.value.password
+      ).then(
         (success) => {
         console.log(success);
         this.router.navigate(['/dashboard']);
@@ -129,7 +130,7 @@ export class LoginComponent {
 })
 
 export class ResetpassComponent {
-  constructor(private af: AngularFire) { }
+  constructor(private afAuth: AngularFireAuth) { }
 
   onSubmit(formData) {
      if(formData.valid) {
