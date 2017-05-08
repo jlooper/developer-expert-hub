@@ -11,11 +11,7 @@ import * as firebase from 'firebase/app';
   templateUrl: 'app.component.html'
 })
 export class AppComponent { 
-  /*constructor(af: AngularFireModule, db: AngularFireDatabaseModule, auth: AngularFireAuthModule, private router: Router) {
-    const user = auth.subscribe(
-      auth => this.getUser(auth)
-    );
-}*/
+
 user: Observable<firebase.User>;
 constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private router: Router) {
   this.user = afAuth.authState;
