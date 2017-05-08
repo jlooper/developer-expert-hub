@@ -8,21 +8,23 @@ import * as firebase from 'firebase/app';
 
 
 @Injectable()
-export class AuthGuard /* implements CanActivate*/{
+export class AuthGuard implements CanActivate{
   public allowed: boolean;
   user: Observable<firebase.User>;
   constructor(private afAuth: AngularFireAuth, private router: Router) { 
     this.user = afAuth.authState;
   }
 
-  /*canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.afAuth.auth.map((auth) =>  {
-      if(auth == null) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    
+    return this.user.map((user) =>  {
+      if(user == null) {
         this.router.navigate(['/login']);
         return false;
       } else {
         return true;
       }
     }).first()
-  }*/
+    
+  }
 }
