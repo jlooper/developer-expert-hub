@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuthModule, AngularFireAuth, AngularFireAuthProvider } from 'angularfire2/auth';
 
 import { AppComponent, PageNotFoundComponent } from './app.component';
 
@@ -25,10 +25,6 @@ export const config = {
     storageBucket: "developer-expert-hub.appspot.com",
     messagingSenderId: "481924833661"
 };
-/*export const firebaseAuthConfig = {
-  provider: AuthProviders.Password,
-  method: AuthMethods.Password
-}*/
 
 @NgModule({
   imports:      [ 
@@ -36,6 +32,7 @@ export const config = {
     AngularFireModule.initializeApp(config, 'root-app'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AuthModule,
     DashModule,
     AppRouting,
     CommonModule
