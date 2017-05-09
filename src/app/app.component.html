@@ -5,6 +5,8 @@
         
         <a class="navbar-brand" href="/"><img src="/assets/img/logo.png"></a>
 
+I'm a member: {{member}}
+
         <span *ngIf="(user | async) && member">
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-item button"><a routerLink="/dashboard/profile">My Profile</a></li>
@@ -14,7 +16,6 @@
         </span>
         <!--if not logged in and not a member-->
         <span *ngIf="!(user | async) || !member">
-            
             <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-item button"><a routerLink="/login">Login</a></li>
                     <li class="navbar-item button"><a routerLink="/signup">Join</a></li>

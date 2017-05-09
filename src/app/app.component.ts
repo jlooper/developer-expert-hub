@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -10,18 +10,42 @@ import * as firebase from 'firebase/app';
   selector: 'root-app',
   templateUrl: 'app.component.html'
 })
-export class AppComponent { 
+export class AppComponent implements OnInit { 
 
 user: Observable<firebase.User>;
-constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private router: Router) {
+
+member = false;
+id: any;
+environment = window.location.hostname;
+  
+constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router) {
   this.user = afAuth.authState;
+  this.user.subscribe((user: firebase.User) => {
+    console.log(user)
+  if(user != null){
+    this.id = user.uid;
+    console.log(this.id);
+  }
+});
 }
 
-  member = false;
-  environment = window.location.hostname;
-  
+ngOnInit(){
+  console.log("hi")
 
-  getUser(auth){
+  const queryObservable = this.db.list('/Profile', {
+      query: {
+        orderByChild: 'uid',
+        equalTo: this.id
+      }
+   });
+
+    queryObservable.subscribe(queriedItems => {
+        this.member = queriedItems[0].member; 
+    });
+
+}
+
+  /*getUser(auth){
     if (auth != null) {
       const queryObservable = this.db.list('/Profile', {
       query: {
@@ -31,13 +55,12 @@ constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, pr
    });
 
     queryObservable.subscribe(queriedItems => {
-        console.log(queriedItems);
-        this.member = queriedItems[0].member;  
+        this.member = queriedItems[0].member; 
     });
     
-  }
+   }
 
-  }
+  }*/
 
   logout() {
     this.afAuth.auth.signOut();

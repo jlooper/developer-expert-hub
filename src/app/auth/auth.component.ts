@@ -21,7 +21,7 @@ user: Observable<firebase.User>;
   }
 
   getUser(auth){
-    console.log(auth)
+    console.log("hi",auth)
     if (auth) {
         const queryObservable = this.db.list('/Profile', {
         query: {
@@ -102,12 +102,11 @@ user: Observable<firebase.User>;
 export class LoginComponent {
   public error: any;
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) { }
+  constructor(public afAuth: AngularFireAuth, private router: Router) { }
 
   onSubmit(formData) {
         
     if(formData.valid) {
-      console.log(formData.value);
       this.afAuth.auth.signInWithEmailAndPassword(
         formData.value.email,
         formData.value.password
