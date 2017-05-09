@@ -5,11 +5,9 @@
                 <h2>Our Experts</h2>
             </div>
         </div>
-        <div class="row">
-           
-                
+        <div class="row">                      
                 <div *ngFor="let item of items | async">
-                    <div class="col-sm-4 portfolio-item">
+                    <div class="col-xs-6 col-md-4 portfolio-item">
                             <div class="caption">
                                 <div>
                                     <img src="{{item.image}}" class="portfolio-image img-responsive" alt="{{item.fname}} {{item.lname}}" width="200" height="200">
