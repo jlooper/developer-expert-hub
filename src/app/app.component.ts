@@ -30,7 +30,6 @@ constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth, pri
 }
 
 ngOnInit(){
-  console.log("hi")
 
   const queryObservable = this.db.list('/Profile', {
       query: {

@@ -21,7 +21,6 @@ user: Observable<firebase.User>;
   }
 
   getUser(auth){
-    console.log("hi",auth)
     if (auth) {
         const queryObservable = this.db.list('/Profile', {
         query: {

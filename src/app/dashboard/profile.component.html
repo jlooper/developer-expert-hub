@@ -6,20 +6,19 @@
             </div>
         </div>
         <div class="row">    
-          <div *ngIf="!userData" class="callout alert">
+          <div *ngIf="!currUser" class="callout alert">
             <p class="lead">
               No Data available
             </p>
           </div>
-          <div *ngIf="userData">
+          <div *ngIf="currUser">
             <p>
-              Email: {{ userData.auth.email }} <br>
-              DisplayName: {{ userData.auth.displayName }} <br>
-              Verification: {{ userData.auth.emailVerified}} <br>
-              Login Means: {{ userData.auth.providerData | json }}
+              Name: {{ name }} <br>
+              Email: {{ email }} <br>
+              Company: {{ company }} <br>
+              Bio: {{ bio }} <br>
+              Expertise: {{ expertise }}
             </p>
-            <hr>
-            {{ userData | json }}
           </div>
       </div>
     </div>
