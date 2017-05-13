@@ -59,7 +59,6 @@ user: Observable<firebase.User>;
     var storageRef = firebase.storage().ref(storageUrl + name);
     storageRef.put(file).then(function(snapshot) {
       //get the download URL
-      console.log(snapshot.downloadURL)
       localStorage.setItem("currFile",snapshot.downloadURL);
     }); 
   }
@@ -86,6 +85,8 @@ user: Observable<firebase.User>;
     .then(
         (success) => {
         console.log(success);
+        //clear localstorage
+        localStorage.remoteItem("currFile");
         this.router.navigate(['/success']);
       }).catch(
         (err) => {
