@@ -324,6 +324,12 @@ section.success {
     width: 100%;
 }
 
+.form {
+    background-color: #eff;
+    border-radius: 5px;
+    padding: 20px;
+}
+
 
 .floating-label-form-group {
     position: relative;
