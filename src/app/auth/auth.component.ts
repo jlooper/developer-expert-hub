@@ -16,12 +16,12 @@ export class SignupComponent {
   public expertise: any = [];
 
 user: Observable<firebase.User>;
-fb: firebase.app.App;
+//fb: firebase.app.App;
 
  constructor(
     private afAuth: AngularFireAuth, 
     private db: AngularFireDatabase,
-    @Inject(AngularFireModule) public firebaseApp: firebase.app.App, 
+    //@Inject(AngularFireModule) private firebaseApp: firebase.app.App, 
     private router: Router) {
       this.user = afAuth.authState; 
   }
@@ -62,14 +62,12 @@ fb: firebase.app.App;
     var file = files[0];
     var storageUrl = 'images/';
     var name = `img-${Date.now()}.jpg`;
-    const storageRef = this.firebaseApp.storage().ref().child(storageUrl + name);
-    //var storageRef = this.firebaseApp.storage().ref(storageUrl + name);
-    /*storageRef.put(file).then(function(snapshot) {
+    var storageRef = firebase.storage().ref(storageUrl + name);
+    storageRef.put(file).then(function(snapshot) {
       //get the download URL
       console.log(snapshot.downloadURL)
       localStorage.setItem("currFile",snapshot.downloadURL);
-    });*/
-    storageRef.getDownloadURL().then(url => localStorage.setItem("currFile",url));
+    });
   }
 
   onSubmit(formData) {

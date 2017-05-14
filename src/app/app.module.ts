@@ -29,7 +29,7 @@ export const config = {
 @NgModule({
   imports:      [ 
     BrowserModule,
-    AngularFireModule.initializeApp(config, 'root-app'),
+    AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AuthModule,
