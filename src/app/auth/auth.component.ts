@@ -16,12 +16,10 @@ export class SignupComponent {
   public expertise: any = [];
 
 user: Observable<firebase.User>;
-//fb: firebase.app.App;
 
  constructor(
     private afAuth: AngularFireAuth, 
     private db: AngularFireDatabase,
-    //@Inject(AngularFireModule) private firebaseApp: firebase.app.App, 
     private router: Router) {
       this.user = afAuth.authState; 
   }

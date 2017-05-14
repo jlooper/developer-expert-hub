@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AuthGuard } from '../auth/auth-guard.service';
-
+import { HttpModule } from '@angular/http';
 import { dashRouting } from './dashboard.routing';
 import { DashboardComponent } from './dashboard.component';
 import { ProfileComponent, AccountComponent, ActivitiesComponent } from './child.component';
@@ -12,7 +12,8 @@ import { ProfileComponent, AccountComponent, ActivitiesComponent } from './child
   imports:      [ 
     dashRouting,
     FormsModule,
-    CommonModule
+    CommonModule,
+    HttpModule
    ],
    providers: [AuthGuard],
   declarations: [ 

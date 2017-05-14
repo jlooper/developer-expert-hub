@@ -6,12 +6,16 @@
                 </div>
             </div>
             <div class="row">
+                <h3>Submit an Activity</h3>
                 <div class="col-lg-8 col-lg-offset-2">
+                    <div *ngIf="success" class="alert alert-success text-center">{{success}}</div>
+                    <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
+                    
                     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="activity">Activity</label>
-                                <textarea rows="5" class="form-control" (ngModel)="activity" placeholder="My most recent activity" id="activity" required data-validation-required-message="Please enter an activity."></textarea>
+                                <input class="form-control" (ngModel)="activity" placeholder="Submit a URL referencing your most recent activity" id="activity" name="activity" required data-validation-required-message="Please enter an activity."/>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -25,6 +29,13 @@
 
                     </form>
                 </div>
+            </div>
+            <div class="row">
+                <h3>My Most Recent Activities</h3>
+                 <ul *ngFor="let activity of activities | async">
+                    <li>{{activity.logged | date : 'MM/dd/yyyy'}} - <pre>{{unfurledUrl | json}}</pre></li>
+                </ul>
+                      
             </div>
         </div>
     </section>
