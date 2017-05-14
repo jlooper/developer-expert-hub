@@ -92,7 +92,10 @@ export class ActivitiesComponent implements OnInit {
       }
       
     });
-    this.activities.subscribe(queriedItems => {
+
+  
+  
+    /*this.activities.subscribe(queriedItems => {
         for (let prop in queriedItems){
           return this.http.get('http://unfurl.oroboro.com/unfurl?url='+queriedItems[prop].activity+'')
             .map(response => response.json())
@@ -101,11 +104,12 @@ export class ActivitiesComponent implements OnInit {
               error => console.error('Error'),
               () => console.log('Completed!')
             );
-          }
+           }
         
-    });
+    });*/
   }
 
+  
 
    onSubmit(formData){
     const data = this.db.list('/Activities')

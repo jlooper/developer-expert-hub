@@ -32,10 +32,12 @@
             </div>
             <div class="row">
                 <h3>My Most Recent Activities</h3>
-                 <ul *ngFor="let activity of activities | async">
+                 <!--<ul *ngFor="let activity of activities | async">
                     <li>{{activity.logged | date : 'MM/dd/yyyy'}} - <pre>{{unfurledUrl | json}}</pre></li>
-                </ul>
-                      
+                </ul>-->
+                <ul *ngFor="let activity of activities | async">
+                    <li>{{activity.logged | date : 'MM/dd/yyyy'}} - <a href="{{activity.activity}}">{{ activity.activity }}</a> </li>
+                </ul>  
             </div>
         </div>
     </section>
