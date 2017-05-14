@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from "firebase";
 import { AngularFireModule } from 'angularfire2';
@@ -16,8 +16,14 @@ export class SignupComponent {
   public expertise: any = [];
 
 user: Observable<firebase.User>;
- constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
-    this.user = afAuth.authState;
+fb: firebase.app.App;
+
+ constructor(
+    private afAuth: AngularFireAuth, 
+    private db: AngularFireDatabase,
+    @Inject(AngularFireModule) public firebaseApp: firebase.app.App, 
+    private router: Router) {
+      this.user = afAuth.authState; 
   }
 
   getUser(auth){
@@ -56,11 +62,14 @@ user: Observable<firebase.User>;
     var file = files[0];
     var storageUrl = 'images/';
     var name = `img-${Date.now()}.jpg`;
-    var storageRef = firebase.storage().ref(storageUrl + name);
-    storageRef.put(file).then(function(snapshot) {
+    const storageRef = this.firebaseApp.storage().ref().child(storageUrl + name);
+    //var storageRef = this.firebaseApp.storage().ref(storageUrl + name);
+    /*storageRef.put(file).then(function(snapshot) {
       //get the download URL
+      console.log(snapshot.downloadURL)
       localStorage.setItem("currFile",snapshot.downloadURL);
-    }); 
+    });*/
+    storageRef.getDownloadURL().then(url => localStorage.setItem("currFile",url));
   }
 
   onSubmit(formData) {
@@ -81,6 +90,8 @@ user: Observable<firebase.User>;
 
   createUserProfile(uid,fname,lname,title,company,bio,expertise){
     const data = this.db.list('/Profile')
+    console.log(localStorage.getItem("currFile"));
+      
       data.push({ uid: uid, fname: fname, lname: lname, title: title, company: company, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false })
     .then(
         (success) => {
