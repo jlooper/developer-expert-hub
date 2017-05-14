@@ -86,7 +86,7 @@ user: Observable<firebase.User>;
         (success) => {
         console.log(success);
         //clear localstorage
-        localStorage.remoteItem("currFile");
+        localStorage.removeItem("currFile");
         this.router.navigate(['/success']);
       }).catch(
         (err) => {
