@@ -4,7 +4,7 @@
     <div class="container">
         
         <a class="navbar-brand" href="/"><img src="/assets/img/logo.png"></a>
-
+        <!--if logged in and a member -->
         <span *ngIf="(user | async) && member">
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-item button"><a routerLink="/dashboard/profile">My Profile</a></li>
@@ -16,8 +16,8 @@
         <!--if not logged in and not a member-->
         <span *ngIf="!(user | async) || !member">
             <ul class="nav navbar-nav navbar-right">
-                    <li class="navbar-item button"><a routerLink="/login">Login</a></li>
-                    <li class="navbar-item button"><a routerLink="/signup">Join</a></li>
+                <li class="navbar-item button"><a routerLink="/login">Login</a></li>
+                <li class="navbar-item button"><a routerLink="/signup">Join</a></li>
             </ul>
         </span>
     </div>
@@ -28,8 +28,9 @@
 
     <router-outlet></router-outlet>
 
-<div *ngIf="this.environment == '127.0.0.1'" class="menu-centered">
+<div *ngIf="this.environment == 'localhost'" class="menu-centered">
     <ul class="menu">
+        <li>member? {{member}}</li>
         <li *ngIf="user | async">LOGGED IN</li>
         <li *ngIf="!(user | async)">NOT LOGGED IN</li>
     </ul>

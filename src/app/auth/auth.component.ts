@@ -14,6 +14,7 @@ import { Observable } from 'rxjs/observable';
 export class SignupComponent {
   public error: any;
   public expertise: any = [];
+  public member: false;
 
 user: Observable<firebase.User>;
 
@@ -24,23 +25,21 @@ user: Observable<firebase.User>;
       this.user = afAuth.authState; 
   }
 
-  getUser(auth){
+  /*getUser(auth){
     if (auth) {
-        const queryObservable = this.db.list('/Profile', {
+      const queryObservable = this.db.list('/Profile', {
         query: {
           orderByChild: 'uid',
           equalTo: auth.uid 
         }
       });
       queryObservable.subscribe(queriedItems => {
-          console.log(queriedItems);
-            
+          this.member = queriedItems[0].member; 
       });
     }
-  }
+  }*/
 
   appendExpertise(status,value){
-    console.log(status,value)
     if(status){
       this.expertise.push(value)
     }

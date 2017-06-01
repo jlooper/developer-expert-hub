@@ -14,33 +14,35 @@ export class AppComponent implements OnInit {
 
 user: Observable<firebase.User>;
 
-member = false;
 id: any;
+member: boolean;
 environment = window.location.hostname;
   
 constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router) {
   this.user = afAuth.authState;
   this.user.subscribe((user: firebase.User) => {
-    console.log(user)
-  if(user != null){
-    this.id = user.uid;
-    console.log(this.id);
-  }
+      if(user != null){
+        this.id = user.uid;
+        console.log("my id is", this.id);
+        const queryObservable = this.db.list('/Profile', {
+            query: {
+              orderByChild: 'uid',
+              equalTo: this.id
+            }
+        });
+
+          queryObservable.subscribe(queriedItems => {
+            console.log(queriedItems[0])
+              this.member = queriedItems[0].member; 
+              console.log("I'm a member",this.member)
+          });
+      }
 });
 }
 
 ngOnInit(){
 
-  const queryObservable = this.db.list('/Profile', {
-      query: {
-        orderByChild: 'uid',
-        equalTo: this.id
-      }
-   });
-
-    queryObservable.subscribe(queriedItems => {
-        this.member = queriedItems[0].member; 
-    });
+  
 
 }
 
@@ -63,6 +65,8 @@ ngOnInit(){
 
   logout() {
     this.afAuth.auth.signOut();
+    this.member = false;
+    this.id = '';
     this.router.navigate(['/'])
   }
 }

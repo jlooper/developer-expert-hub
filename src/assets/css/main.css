@@ -240,6 +240,7 @@ section.success {
 #portfolio .caption{
     background: lightgray;
     border-radius: 5px;
+    padding: 10px;
 }
 
 #portfolio .portfolio-item {
