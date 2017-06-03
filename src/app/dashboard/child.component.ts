@@ -7,12 +7,35 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 //profile
 @Component({
-  selector: 'profile',
-  templateUrl: 'profile.component.html'
+  selector: 'home',
+  templateUrl: 'home.component.html'
 })
 
-export class ProfileComponent { 
+export class HomeComponent implements OnInit { 
     
+  user: Observable<firebase.User>;
+  activities: Observable<any>;
+  id: any;
+  success: string;
+  error: string;
+
+  constructor(private http: Http, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {}
+
+  ngOnInit(){
+    this.activities = this.db.list('/Activities', {
+  });
+
+  }
+    
+}
+//my account
+@Component({
+  selector: 'account',
+  templateUrl: 'account.component.html'
+})
+
+export class AccountComponent {
+
     user: Observable<firebase.User>;
     currUser: FirebaseListObservable<any[]>;
     name: string;
@@ -42,16 +65,7 @@ export class ProfileComponent {
               });
       }
     });
-  }
-    
-}
-//my account
-@Component({
-  selector: 'account',
-  templateUrl: 'account.component.html'
-})
-
-export class AccountComponent { 
+  } 
 
   onSubmit(formData) {
     if(formData.valid) {
@@ -66,12 +80,11 @@ export class AccountComponent {
   templateUrl: 'activities.component.html'
 })
     
-export class ActivitiesComponent implements OnInit { 
+export class ActivitiesComponent { 
   
   user: Observable<firebase.User>;
   activities: Observable<any>;
   id: any;
-  unfurledUrl:any;
   success: string;
   error: string;
 
@@ -80,38 +93,18 @@ export class ActivitiesComponent implements OnInit {
       this.user.subscribe((user: firebase.User) => {
       if(user != null){
         this.id = user.uid;
-      }
-    });
-  }
-
-  ngOnInit(){
-    this.activities = this.db.list('/Activities', {
-      query: {
-        orderByChild: 'uid',
-        equalTo: this.id
-      }
-      
-    });
-
+        this.activities = this.db.list('/Activities', {
+          query: {
+            orderByChild: 'uid',
+            equalTo: this.id
+          }
+      });
+    }
+  })
   
-  
-    /*this.activities.subscribe(queriedItems => {
-        for (let prop in queriedItems){
-          return this.http.get('http://unfurl.oroboro.com/unfurl?url='+queriedItems[prop].activity+'')
-            .map(response => response.json())
-            .subscribe(
-              response => this.unfurledUrl = response,
-              error => console.error('Error'),
-              () => console.log('Completed!')
-            );
-           }
-        
-    });*/
-  }
+}
 
-  
-
-   onSubmit(formData){
+onSubmit(formData){
     const data = this.db.list('/Activities')
       data.push({ uid: this.id, activity: formData.value.activity, logged:firebase.database.ServerValue.TIMESTAMP })
     .then(
@@ -123,3 +116,46 @@ export class ActivitiesComponent implements OnInit {
       })
   }
 }
+
+//request
+@Component({
+  selector: 'request',
+  templateUrl: 'request.component.html'
+})
+    
+export class RequestComponent { 
+  
+  user: Observable<firebase.User>;
+  id: any;
+  success: string;
+  error: string;
+  requesttype = ['Software Subscription', 'Travel Grant'];
+
+
+constructor(private http: Http, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+    this.user = afAuth.authState;
+      this.user.subscribe((user: firebase.User) => {
+      if(user != null){
+        this.id = user.uid;
+    }
+    
+  })
+  
+}
+  
+  
+
+onSubmit(formData){
+
+    const data = this.db.list('/Requests')
+      data.push({ uid: this.id, request: formData.value.request, logged:firebase.database.ServerValue.TIMESTAMP })
+    .then(
+        (success) => {
+        this.success = "Request logged!";
+      }).catch(
+        (err) => {
+        this.error = err.message;
+      })
+  }
+}
+

@@ -119,7 +119,7 @@ export class LoginComponent {
       ).then(
         (success) => {
         console.log(success);
-        this.router.navigate(['/dashboard/profile']);
+        this.router.navigate(['/dashboard']);
       }).catch(
         (err) => {
         this.error = err.message;
