@@ -127,28 +127,34 @@ export class RequestComponent {
   
   user: Observable<firebase.User>;
   id: any;
+  email: string;
   success: string;
   error: string;
-  requesttype = ['Software Subscription', 'Travel Grant'];
-
+  requesttype: string;
 
 constructor(private http: Http, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
       this.user.subscribe((user: firebase.User) => {
       if(user != null){
         this.id = user.uid;
+        this.email = user.email
     }
     
   })
   
 }
   
-  
+
+handleChange(status,value){
+    if(status){
+      this.requesttype=value;
+    }
+  }
 
 onSubmit(formData){
 
     const data = this.db.list('/Requests')
-      data.push({ uid: this.id, request: formData.value.request, logged:firebase.database.ServerValue.TIMESTAMP })
+      data.push({ email: this.email, uid: this.id, request: formData.value.request, requesttype: this.requesttype, logged:firebase.database.ServerValue.TIMESTAMP })
     .then(
         (success) => {
         this.success = "Request logged!";

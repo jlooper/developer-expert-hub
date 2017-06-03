@@ -19,6 +19,21 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
+
+                        <div class="row control-group">
+                        <h3>Request Type</h3>
+                        <div class="radio">
+                            <label class="h4">
+                                <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="requesttype" name="requesttype" type="radio" value="Software"  [(ngModel)]="requesttype" >Software
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="h4">
+                                <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="requesttype" name="requesttype" type="radio" value="Travel Grant" [(ngModel)]="requesttype" >Travel Grant
+                            </label>
+                        </div>
+                        </div>
+
                         
                         <br>
                         <div id="success"></div>
