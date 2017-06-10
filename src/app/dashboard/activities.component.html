@@ -6,7 +6,6 @@
                 </div>
             </div>
             <div class="form row">
-                <h3>Submit an Activity</h3>
                 <div class="col-lg-8 col-lg-offset-2">
                     <div *ngIf="success" class="alert alert-success text-center">{{success}}</div>
                     <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
@@ -29,15 +28,6 @@
 
                     </form>
                 </div>
-            </div>
-            <div class="row">
-                <h3>My Most Recent Activities</h3>
-                 <!--<ul *ngFor="let activity of activities | async">
-                    <li>{{activity.logged | date : 'MM/dd/yyyy'}} - <pre>{{unfurledUrl | json}}</pre></li>
-                </ul>-->
-                <ul *ngFor="let activity of activities | async">
-                    <li>{{activity.logged | date : 'MM/dd/yyyy'}} - <a href="{{activity.activity}}">{{ activity.activity }}</a> </li>
-                </ul>  
             </div>
         </div>
     </section>

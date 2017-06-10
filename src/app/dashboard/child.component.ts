@@ -4,7 +4,9 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { Observable } from 'rxjs/observable';
 import * as firebase from "firebase";
 import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import {map} from 'rxjs/operator/map';
+
+
 //profile
 @Component({
   selector: 'home',
@@ -13,21 +15,28 @@ import 'rxjs/add/operator/map';
 
 export class HomeComponent implements OnInit { 
     
-  user: Observable<firebase.User>;
-  activities: Observable<any>;
-  id: any;
-  success: string;
-  error: string;
+  private profiles: FirebaseListObservable<any[]>;
+  private users: Array<any[]>;
 
-  constructor(private http: Http, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {}
+  constructor(private db: AngularFireDatabase) {}
 
   ngOnInit(){
-    this.activities = this.db.list('/Activities', {
-  });
-
+    //show only profiles with activities
+    this.profiles = this.db.list('/Profile/');
+    this.profiles.subscribe(queriedItems => {
+      this.users = [];
+      for (let prop in queriedItems){
+        if (queriedItems[prop].Activities){
+          this.users.push(queriedItems[prop])
+        }
+      }
+    });
   }
-    
-}
+  generateArray(obj){
+   return Object.keys(obj).map((key)=>{ return obj[key]});
+  }
+  
+}   
 //my account
 @Component({
   selector: 'account',
@@ -38,6 +47,8 @@ export class AccountComponent {
 
     user: Observable<firebase.User>;
     currUser: FirebaseListObservable<any[]>;
+    activities: FirebaseListObservable<any[]>;
+    requests: FirebaseListObservable<any[]>;
     name: string;
     company: string;
     bio: string;
@@ -51,26 +62,20 @@ export class AccountComponent {
       if(user != null){
         this.id = user.uid;
         this.email = user.email;
-         this.currUser = this.db.list('/Profile');
-          //regular querying is broken in AF afaik
+         this.currUser = this.db.list('/Profile/'+this.id+'/User');
             this.currUser.subscribe(queriedItems => {
                   for (let prop in queriedItems){
-                    if (queriedItems[prop].uid == this.id){
                       this.name = queriedItems[prop].fname + ' ' + queriedItems[prop].lname;
                       this.company = queriedItems[prop].company;
                       this.bio = queriedItems[prop].bio;
                       this.expertise = queriedItems[prop].expertise;
-                    }
                   }  
               });
+        this.activities = this.db.list('/Profile/'+this.id+'/Activities');
+        this.requests = this.db.list('/Profile/'+this.id+'/Requests');
+
       }
     });
-  } 
-
-  onSubmit(formData) {
-    if(formData.valid) {
-      console.log(formData.value);
-    }
   }
 
 }
@@ -85,6 +90,7 @@ export class ActivitiesComponent {
   user: Observable<firebase.User>;
   activities: Observable<any>;
   id: any;
+  email: string;
   success: string;
   error: string;
 
@@ -93,20 +99,18 @@ export class ActivitiesComponent {
       this.user.subscribe((user: firebase.User) => {
       if(user != null){
         this.id = user.uid;
-        this.activities = this.db.list('/Activities', {
-          query: {
-            orderByChild: 'uid',
-            equalTo: this.id
-          }
-      });
-    }
+        this.email = user.email;
+        this.activities = this.db.list('/Profile/'+this.id+'/Activities');
+        
+      }
   })
   
 }
 
+
 onSubmit(formData){
-    const data = this.db.list('/Activities')
-      data.push({ uid: this.id, activity: formData.value.activity, logged:firebase.database.ServerValue.TIMESTAMP })
+    const data = this.db.list('/Profile/'+this.id+'/Activities')
+      data.push({ activity: formData.value.activity, date:firebase.database.ServerValue.TIMESTAMP })
     .then(
         (success) => {
         this.success = "Activity logged!";
@@ -152,9 +156,9 @@ handleChange(status,value){
   }
 
 onSubmit(formData){
-
-    const data = this.db.list('/Requests')
-      data.push({ email: this.email, uid: this.id, request: formData.value.request, requesttype: this.requesttype, logged:firebase.database.ServerValue.TIMESTAMP })
+//push to the user's id within the Requests object
+    const data = this.db.list('/Profile/'+this.id+'/Requests')
+      data.push({ request: formData.value.request, requesttype: this.requesttype, date:firebase.database.ServerValue.TIMESTAMP })
     .then(
         (success) => {
         this.success = "Request logged!";

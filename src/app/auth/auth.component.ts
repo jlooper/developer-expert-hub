@@ -25,20 +25,6 @@ user: Observable<firebase.User>;
       this.user = afAuth.authState; 
   }
 
-  /*getUser(auth){
-    if (auth) {
-      const queryObservable = this.db.list('/Profile', {
-        query: {
-          orderByChild: 'uid',
-          equalTo: auth.uid 
-        }
-      });
-      queryObservable.subscribe(queriedItems => {
-          this.member = queriedItems[0].member; 
-      });
-    }
-  }*/
-
   appendExpertise(status,value){
     if(status){
       this.expertise.push(value)
@@ -83,11 +69,11 @@ user: Observable<firebase.User>;
     }
   }
 
+
+
   createUserProfile(uid,fname,lname,title,company,bio,expertise){
-    const data = this.db.list('/Profile')
-    console.log(localStorage.getItem("currFile"));
-      
-      data.push({ uid: uid, fname: fname, lname: lname, title: title, company: company, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false })
+    const data = this.db.list('/Profile/'+uid+'/User')      
+      data.push({ fname: fname, lname: lname, title: title, company: company, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false, date: firebase.database.ServerValue.TIMESTAMP  })
     .then(
         (success) => {
         console.log(success);
@@ -107,19 +93,32 @@ user: Observable<firebase.User>;
 
 export class LoginComponent {
   public error: any;
+  public member: false;
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) { }
+  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router) { }
+
+ getUser(id){
+      const queryObservable = this.db.list('/Profile/'+id+'/User');
+      queryObservable.subscribe(queriedItems => {
+          this.member = queriedItems[0].member;
+          console.log(this.member)
+          if(this.member){
+            this.router.navigate(['/dashboard']);
+          } 
+          else{
+            this.error = "You have not yet been approved as a member of this group."
+          }
+      });
+  }
 
   onSubmit(formData) {
-        
     if(formData.valid) {
       this.afAuth.auth.signInWithEmailAndPassword(
         formData.value.email,
         formData.value.password
       ).then(
         (success) => {
-        console.log(success);
-        this.router.navigate(['/dashboard']);
+        this.getUser(success.uid);
       }).catch(
         (err) => {
         this.error = err.message;

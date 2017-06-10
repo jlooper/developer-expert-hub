@@ -18,12 +18,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 
 export const config = {
-    apiKey: "AIzaSyDx-mZpJVlElmCv4fVX1wbbIhR377nq49s",
-    authDomain: "developer-expert-hub.firebaseapp.com",
-    databaseURL: "https://developer-expert-hub.firebaseio.com",
-    projectId: "developer-expert-hub",
-    storageBucket: "developer-expert-hub.appspot.com",
-    messagingSenderId: "481924833661"
+    apiKey: "AIzaSyAm6x_xIJUbLEs8QG9IEidzMarTfMHwFlg",
+    authDomain: "developer-experts-hub.firebaseapp.com",
+    databaseURL: "https://developer-experts-hub.firebaseio.com",
+    projectId: "developer-experts-hub",
+    storageBucket: "developer-experts-hub.appspot.com",
+    messagingSenderId: "850105688978"
 };
 
 @NgModule({

@@ -6,10 +6,17 @@
             </div>
         </div>
         <div class="row">
-                <h3>Most Recent Activities</h3>
-                 <ul *ngFor="let activity of activities | async">
-                    <li>{{activity.logged | date : 'MM/dd/yyyy'}} - <a href="{{activity.activity}}">{{ activity.activity }}</a> </li>
-                </ul>  
+            <h3>Most Recent Activities</h3>
+            <div *ngFor="let user of users">
+                <div *ngFor="let data of generateArray(user.User)">
+                    <p>{{data.fname}} {{data.lname}}</p>
+                </div>
+                <div *ngFor="let data of generateArray(user.Activities)">
+                    <li>{{data.date | date : 'MM/dd/yyyy'}} - <a href="{{data.activity}}">{{ data.activity }}</a></li>
+                </div>
+                <hr/>
+            </div>
+            
         </div>
     </div>
-  </section>
+</section>

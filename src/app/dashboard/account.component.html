@@ -7,7 +7,8 @@
             </div>
 
             <div class="container">
-                <div class="row">    
+                <div class="row"> 
+                    <h4>My Profile</h4>   
                     <p>
                         Name: {{ name }} <br>
                         Email: {{ email }} <br>
@@ -15,10 +16,18 @@
                         Bio: {{ bio }} <br>
                         Expertise: {{ expertise }}
                     </p>
+                    <h4>My Activities</h4>
+                    <ul *ngFor="let activity of activities | async">
+                        <li>{{activity.date | date : 'MM/dd/yyyy'}} - <a href="{{activity.activity}}">{{ activity.activity }}</a></li>
+                    </ul>
+                    <h4>My Requests</h4>
+                    <ul *ngFor="let request of requests | async">
+                        <li>{{request.date | date : 'MM/dd/yyyy'}} - {{ request.request }}</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="form row">
+            <!--<div class="form row">
                 <div class="col-lg-8 col-lg-offset-2">
                 <h3>Change My Password</h3>
                     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
@@ -45,6 +54,6 @@
                         </div>
                 </form>
             </div>
-        </div>
+        </div>-->
     </div>
 </section>

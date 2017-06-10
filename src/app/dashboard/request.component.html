@@ -12,6 +12,22 @@
                     <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
                     
                     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+
+
+                        <div class="row control-group">
+                            <h3>Request Type</h3>
+                            <div class="radio">
+                                <label class="h4">
+                                    <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="requesttype" name="requesttype" type="radio" value="Software"  [(ngModel)]="requesttype" >Software
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="h4">
+                                    <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="requesttype" name="requesttype" type="radio" value="Travel Grant" [(ngModel)]="requesttype" >Travel Grant
+                                </label>
+                            </div>
+                        </div>
+                        
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="request">Request</label>
@@ -19,24 +35,7 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
-
-                        <div class="row control-group">
-                        <h3>Request Type</h3>
-                        <div class="radio">
-                            <label class="h4">
-                                <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="requesttype" name="requesttype" type="radio" value="Software"  [(ngModel)]="requesttype" >Software
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="h4">
-                                <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="requesttype" name="requesttype" type="radio" value="Travel Grant" [(ngModel)]="requesttype" >Travel Grant
-                            </label>
-                        </div>
-                        </div>
-
-                        
                         <br>
-                        <div id="success"></div>
                         <div class="row">
                             <div class="col-lg-6 col-lg-offset-3">
                                 <button type="submit" [disabled]="!formData.valid" class="btn btn-success btn-primary btn-lg float-right">Submit</button>

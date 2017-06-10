@@ -12,10 +12,10 @@ const mailTransport = nodemailer.createTransport(
 
 const APP_NAME = 'Dev-Experts-Hub';
 
-exports.sendMail = functions.database.ref('/Requests')
+exports.sendMail = functions.database.ref('/Requests/{uid}')
   .onWrite(event => {
-  var data = event.data;
-  return sendEmail(data);
+      const data = event.data.val();
+      return sendEmail(data);
 });
 
 function sendEmail(data) {

@@ -16,6 +16,7 @@ user: Observable<firebase.User>;
 
 id: any;
 member: boolean;
+error: string;
 environment = window.location.hostname;
   
 constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router) {
@@ -23,14 +24,7 @@ constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth, pri
   this.user.subscribe((user: firebase.User) => {
       if(user != null){
         this.id = user.uid;
-        console.log("my id is", this.id);
-        const queryObservable = this.db.list('/Profile', {
-            query: {
-              orderByChild: 'uid',
-              equalTo: this.id
-            }
-        });
-
+        const queryObservable = this.db.list('/Profile/'+this.id+'/User');
           queryObservable.subscribe(queriedItems => {
             console.log(queriedItems[0])
               this.member = queriedItems[0].member; 
@@ -45,23 +39,6 @@ ngOnInit(){
   
 
 }
-
-  /*getUser(auth){
-    if (auth != null) {
-      const queryObservable = this.db.list('/Profile', {
-      query: {
-        orderByChild: 'uid',
-        equalTo: auth.uid 
-      }
-   });
-
-    queryObservable.subscribe(queriedItems => {
-        this.member = queriedItems[0].member; 
-    });
-    
-   }
-
-  }*/
 
   logout() {
     this.afAuth.auth.signOut();

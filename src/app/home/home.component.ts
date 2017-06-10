@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   constructor(private db: AngularFireDatabase, private sanitizer: DomSanitizer, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(){
+    //fix
+    
     this.items = this.db.list('/Profile', {
       query: {
         orderByChild: 'member',
