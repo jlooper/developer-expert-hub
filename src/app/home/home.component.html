@@ -6,21 +6,19 @@
             </div>
         </div>
         <div class="row">                      
-                <div *ngFor="let item of items | async">
+                <div *ngFor="let user of users">
                     <div class="col-xs-6 col-md-4 portfolio-item">
                             <div class="caption">
-                                <div>
-                                    <img src="{{item.image}}" class="portfolio-image img-responsive" alt="{{item.fname}} {{item.lname}}" width="200" height="200">
-                                    <p class="title">{{item.fname}} {{item.lname}}</p>
-                                    <p>{{item.bio}}</p>
-                                    <p>{{item.expertise}}</p>
+                                <div *ngFor="let data of generateArray(user.User)">
+                                    <img src="{{data.image}}" class="portfolio-image img-responsive" alt="{{data.fname}} {{data.lname}}" width="200" height="200">
+                                    <p class="title">{{data.fname}} {{data.lname}}</p>
+                                    <p>{{data.bio}}</p>
+                                    <p>{{data.expertise}}</p>
                                 </div>
                             </div>
+                    </div>
                             
-                    </div> 
-                </div>
-
-                        
+                </div> 
         </div>
     </div>
 </section>
