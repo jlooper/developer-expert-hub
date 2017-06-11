@@ -1,7 +1,7 @@
 
 <section id="page">
     <div class="container">
-        <div class="card col-lg-6 col-lg-offset-3">
+        <div class="card col-lg-8 col-lg-offset-2">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Join</h2>
@@ -16,63 +16,138 @@
                     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
 
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="fname">First Name</label>
+                            <div class="form-group">
+                                <label class="required" for="fname">First Name</label>
                                 <input type="text" class="form-control" (ngModel)="fname" placeholder="First Name" id="fname" name="fname" required data-validation-required-message="First Name is required.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="lname">Last Name</label>
+                            <div class="form-group">
+                                <label class="required" for="lname">Last Name</label>
                                 <input type="text" class="form-control" (ngModel)="lname" placeholder="Last Name" id="lname" name="lname" required data-validation-required-message="Last Name is required.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
 
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="title">Job Title</label>
+                            <div class="form-group ">
+                                <label class="required" for="email">Email</label>
+                                <input type="text" class="form-control" (ngModel)="email" placeholder="Email" id="email" name="email" required data-validation-required-message="Email is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required" for="address1">Street Address</label>
+                                <input type="text" class="form-control" (ngModel)="address1" placeholder="Street Address 1" id="address1" name="address1" required data-validation-required-message="Address is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label for="address2">Additional Address</label>
+                                <input type="text" class="form-control" (ngModel)="address2" placeholder="Street Address 2" id="address1" name="address2">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required" for="city">City</label>
+                                <input type="text" class="form-control" (ngModel)="city" placeholder="City" id="city" name="city">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required" for="state">State/Province/Region</label>
+                                <input type="text" class="form-control" (ngModel)="state" placeholder="State, Province, or Region" id="state" name="state">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required" for="postalcode">Zip/Postal Code</label>
+                                <input type="text" class="form-control" (ngModel)="postalcode" placeholder="Postal Code or Zip Code" id="postalcode" name="postalcode">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required" for="country">Country</label>
+                                <input type="text" class="form-control" (ngModel)="country" placeholder="Country" id="country" name="country">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required" for="phone">Phone</label>
+                                <input type="text" class="form-control" (ngModel)="phone" placeholder="Phone" id="phone" name="phone" required data-validation-required-message="Phone is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <h3>Professional Information</h3>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required" for="company">Company</label>
+                                <input type="text" class="form-control" (ngModel)="company" placeholder="Company" id="company" name="company" required data-validation-required-message="Company Name is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required" for="title">Job Title</label>
                                 <input type="text" class="form-control" (ngModel)="title" placeholder="Job Title" id="title" name="title" required data-validation-required-message="Title is required.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
 
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="company">Company</label>
-                                <input type="text" class="form-control" (ngModel)="company" placeholder="Company" id="company" name="company" required data-validation-required-message="Company Name is required.">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="email">Email</label>
-                                <input type="text" class="form-control" (ngModel)="email" placeholder="Email" id="email" name="email" required data-validation-required-message="Email is required.">
+                            <div class="form-group ">
+                                <label for="website">Website / Blog</label>
+                                <input type="text" class="form-control" (ngModel)="website" placeholder="Website or blog" id="website" name="website">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
 
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="password">Choose a Password</label>
+                            <div class="form-group ">
+                                <label for="twitter">Twitter handle</label>
+                                <input type="text" class="form-control" (ngModel)="twitter" placeholder="Twitter handle" id="twitter" name="twitter">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label for="github">Github profile</label>
+                                <input type="text" class="form-control" (ngModel)="github" placeholder="Github profile" id="github" name="github">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <label class="required"  for="password">Choose a Password</label>
                                 <input type="password" class="form-control" (ngModel)="password" placeholder="Password" id="password" name="password" required data-validation-required-message="Password is required.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
 
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="bio">Bio</label>
-                                <textarea rows="5" class="form-control" (ngModel)="bio" placeholder="Bio" id="bio" name="bio" required data-validation-required-message="Bio is required."></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                                           
-                        <div class="row control-group">
-                        <h3>Progress Product Expertise</h3>
+                        <h3 class="required" >Progress Product Expertise</h3>
                                 <div class="checkbox">
                                     <label><input type="checkbox" value="Sitefinity" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">Sitefinity</label>
                                 </div>
@@ -81,12 +156,37 @@
                                 </div>
                                 <div class="checkbox">
                                     <label><input type="checkbox" value="NativeScript" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">NativeScript</label>
-                                </div>               
+                                </div> 
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="DevCraft" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">DevCraft</label>
+                                </div> 
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="TestStudio" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">Test Studio</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="MobileDevelopment" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">Mobile Development</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="WebDevelopment" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">Web Development</label>
+                                </div> 
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value=".NET" (change)="appendExpertise($event.target.checked,$event.target.getAttribute('value'))">.NET</label>
+                                </div>              
                         </div>
 
-                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="image">Your Photo</label>
+                        <h3 class="required" >More About You</h3>
+
+                        <div class="row control-group">
+                            <div class="form-group ">
+                                <textarea rows="5" class="form-control" (ngModel)="bio" placeholder="Tell us about yourself!" id="bio" name="bio" required data-validation-required-message="Bio is required."></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                                                                  
+                        <h3 class="required" >Your Photo</h3>
+                         
+                        <div class="row control-group">
+                            <div class="form-group ">
                                 <input id="image" name="image" type="file" (ngModel)="image" (change)="fileChange($event)" placeholder="Upload file" accept=".png,.jpg">
                                 <p class="help-block text-danger"></p>
                             </div>

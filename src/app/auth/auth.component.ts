@@ -19,6 +19,16 @@ export class SignupComponent {
   title: string;
   company: string;
   email: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  postalcode: string;
+  country: string;
+  phone: string; 
+  website: string; 
+  twitter: string; 
+  github: string;
   password: string;
   bio: string;
   image: string;
@@ -67,7 +77,15 @@ user: Observable<firebase.User>;
         formData.value.email,formData.value.password        
       ).then(
         (success) => {
-            this.createUserProfile(success.uid,formData.value.fname,formData.value.lname,formData.value.title,formData.value.company,formData.value.bio,this.expertise)
+            this.createUserProfile(success.uid,
+            formData.value.fname,formData.value.lname,
+            formData.value.title,formData.value.company,
+            formData.value.bio,this.expertise,
+            formData.value.address1,formData.value.address2,
+            formData.value.city,formData.value.state,formData.value.postalcode,
+            formData.value.country,formData.value.phone,
+            formData.value.website,formData.value.twitter,
+            formData.value.github)
       }).catch(
         (err) => {
         this.error = err.message;
@@ -77,9 +95,9 @@ user: Observable<firebase.User>;
     }
   }
 
-  createUserProfile(uid,fname,lname,title,company,bio,expertise){
+  createUserProfile(uid,fname,lname,title,company,bio,expertise,address1,address2,city,state,postalcode,country,phone,website,twitter,github){
     const data = this.db.list('/Profile/'+uid+'/User')      
-      data.push({ fname: fname, lname: lname, title: title, company: company, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false, date: firebase.database.ServerValue.TIMESTAMP  })
+      data.push({ fname: fname, lname: lname, title: title, company: company, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false, date: firebase.database.ServerValue.TIMESTAMP,address1: address1,address2: address2,city: city,state: state,postalcode: postalcode,country: country,phone: phone,website: website,twitter: twitter,github: github  })
     .then(
         (success) => {
         console.log(success);

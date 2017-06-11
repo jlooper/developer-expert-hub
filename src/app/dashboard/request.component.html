@@ -15,7 +15,7 @@
 
 
                         <div class="row control-group">
-                            <h3>Request Type</h3>
+                            <h3 class="required">Request Type</h3>
                             <div class="radio">
                                 <label class="h4">
                                     <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="requesttype" name="requesttype" type="radio" value="Software"  [(ngModel)]="requesttype" >Software
@@ -29,8 +29,8 @@
                         </div>
                         
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="request">Request</label>
+                            <div class="form-group">
+                                <h3 class="required" for="request">Request</h3>
                                 <input class="form-control" (ngModel)="request" placeholder="I need..." id="request" name="request" required data-validation-required-message="What do you need?">
                                 <p class="help-block text-danger"></p>
                             </div>

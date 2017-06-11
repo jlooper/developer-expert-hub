@@ -11,14 +11,14 @@
                     <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
                     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="text" class="form-control" (ngModel)="email" placeholder="Email" id="email" name="email" required data-validation-required-message="Email is required.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" (ngModel)="password" placeholder="Password" id="password" name="password" required data-validation-required-message="Password is required.">
                                 <p class="help-block text-danger"></p>

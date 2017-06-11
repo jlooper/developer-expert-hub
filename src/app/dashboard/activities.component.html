@@ -12,8 +12,8 @@
                     
                     <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label for="activity">Activity</label>
+                            <div class="form-group">
+                                <h3 class="required" for="activity">Activity</h3>
                                 <input class="form-control" (ngModel)="activity" placeholder="Submit a URL referencing your most recent activity" id="activity" name="activity" required data-validation-required-message="Please enter an activity."/>
                                 <p class="help-block text-danger"></p>
                             </div>

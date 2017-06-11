@@ -10,9 +10,9 @@ const mailTransport = nodemailer.createTransport(
     `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`);
 
 
-const APP_NAME = 'Dev-Experts-Hub';
+const APP_NAME = 'Developer-Experts-Hub';
 
-exports.sendMail = functions.database.ref('/Requests/{uid}')
+exports.sendMail = functions.database.ref('/Profile/{uid}')
   .onWrite(event => {
       const data = event.data.val();
       return sendEmail(data);
@@ -20,11 +20,11 @@ exports.sendMail = functions.database.ref('/Requests/{uid}')
 
 function sendEmail(data) {
   const mailOptions = {
-    from: '"Dev Expert Hub" <noreply@dev-expert-hub.firebaseapp.com>',
+    from: '"Dev Expert Hub" <noreply@developer-experts-hub.firebaseapp.com>',
     to: 'jen.looper@progress.com'
   };
-  mailOptions.subject = `New Dev Expert Request!`;
-  mailOptions.text = `A new request was just posted to the Dev Experts Hub `+JSON.stringify(data);
+  mailOptions.subject = `New Dev Expert Info!`;
+  mailOptions.text = `New info was just posted to the Dev Experts Hub `+JSON.stringify(data);
   return mailTransport.sendMail(mailOptions).then(() => {
     console.log('Alert email sent');
   });
