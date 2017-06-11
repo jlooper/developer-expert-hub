@@ -16,7 +16,7 @@ import {map} from 'rxjs/operator/map';
 export class HomeComponent implements OnInit { 
     
   private profiles: FirebaseListObservable<any[]>;
-  private users: Array<any[]>;
+  users: Array<any[]>;
 
   constructor(private db: AngularFireDatabase) {}
 
@@ -93,6 +93,7 @@ export class ActivitiesComponent {
   email: string;
   success: string;
   error: string;
+  activity: string;
 
   constructor(private http: Http, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
@@ -135,6 +136,7 @@ export class RequestComponent {
   success: string;
   error: string;
   requesttype: string;
+  request: string;
 
 constructor(private http: Http, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;

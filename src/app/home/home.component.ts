@@ -12,7 +12,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class HomeComponent implements OnInit {
  
   private profiles: FirebaseListObservable<any[]>;
-  private users: Array<any[]>;
+  users: Array<any[]>;
 
   cleanedImage: any;
   private sub:any;

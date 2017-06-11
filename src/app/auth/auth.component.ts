@@ -10,11 +10,19 @@ import { Observable } from 'rxjs/observable';
   templateUrl: 'signup.component.html'
 })
 
-
 export class SignupComponent {
   public error: any;
   public expertise: any = [];
   public member: false;
+  fname: string;
+  lname: string;
+  title: string;
+  company: string;
+  email: string;
+  password: string;
+  bio: string;
+  image: string;
+  message: string;
 
 user: Observable<firebase.User>;
 
@@ -69,8 +77,6 @@ user: Observable<firebase.User>;
     }
   }
 
-
-
   createUserProfile(uid,fname,lname,title,company,bio,expertise){
     const data = this.db.list('/Profile/'+uid+'/User')      
       data.push({ fname: fname, lname: lname, title: title, company: company, expertise: expertise, image: localStorage.getItem("currFile"), bio: bio, member: false, date: firebase.database.ServerValue.TIMESTAMP  })
@@ -94,6 +100,9 @@ user: Observable<firebase.User>;
 export class LoginComponent {
   public error: any;
   public member: false;
+  email: string;
+  password: string;
+  message: string;
 
   constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router) { }
 
@@ -134,6 +143,8 @@ export class LoginComponent {
 })
 
 export class ResetpassComponent {
+  email: string;
+
   constructor(private afAuth: AngularFireAuth) { }
 
   onSubmit(formData) {
