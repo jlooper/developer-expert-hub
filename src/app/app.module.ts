@@ -11,6 +11,7 @@ import { AppComponent, PageNotFoundComponent } from './app.component';
 
 import { AuthModule } from './auth/auth.module';
 import { DashModule } from './dashboard/dashboard.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRouting } from './app.routing';
 
@@ -35,7 +36,8 @@ export const config = {
     AuthModule,
     DashModule,
     AppRouting,
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
    ],
   declarations: [ 
     AppComponent,

@@ -6,7 +6,7 @@ import { PageNotFoundComponent } from './app.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 export const AppRouting: ModuleWithProviders = RouterModule.forRoot(appRoutes);
