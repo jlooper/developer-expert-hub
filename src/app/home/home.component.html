@@ -10,10 +10,22 @@
                     <div class="col-xs-6 col-md-4 portfolio-item">
                             <div class="caption">
                                 <div *ngFor="let data of generateArray(user.User)">
+                                    <h3>{{data.fname}} {{data.lname}}</h3>
                                     <img src="{{data.image}}" class="portfolio-image img-responsive" alt="{{data.fname}} {{data.lname}}" width="200" height="200">
-                                    <p class="title">{{data.fname}} {{data.lname}}</p>
-                                    <p>{{data.bio}}</p>
-                                    <p>{{data.expertise}}</p>
+                                    <p>{{data.title}} at {{data.company}}</p>
+                                    <!--<p>{{data.expertise}}</p>-->
+                                    <ul class="list-inline">
+                                    <li *ngIf="data.website.length>0">
+                                        <a class="btn-social btn-outline" href="{{data.website}}"><i class="fa fa-fw fa-desktop"></i></a>
+                                    </li>
+                                    <li *ngIf="data.twitter.length>0">
+                                        <a class="btn-social btn-outline" href="http://www.twitter.com/{{data.twitter}}"><i class="fa fa-fw fa-twitter"></i></a>
+                                    </li>
+                                    <li *ngIf="data.github.length>0">
+                                        <a class="btn-social btn-outline" href="http://www.github.com/{{data.github}}"><i class="fa fa-fw fa-github"></i></a>
+                                    </li>
+
+                    </ul>
                                 </div>
                             </div>
                     </div>
