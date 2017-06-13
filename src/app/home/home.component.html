@@ -7,13 +7,12 @@
         </div>
         <div class="row">                      
                 <div *ngFor="let user of users">
-                    <div class="col-xs-6 col-md-4 portfolio-item">
+                    <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item">
                             <div class="caption">
                                 <div *ngFor="let data of generateArray(user.User)">
                                     <h3>{{data.fname}} {{data.lname}}</h3>
-                                    <img src="{{data.image}}" class="portfolio-image img-responsive" alt="{{data.fname}} {{data.lname}}" width="200" height="200">
-                                    <p>{{data.title}} at {{data.company}}</p>
-                                    <!--<p>{{data.expertise}}</p>-->
+                                    <div class="panel-heading text-center" [ngStyle]="{ 'background-image': 'url(' + data.image + ')'}"></div> 
+                                    <p class="panel-text">{{data.title}} at {{data.company}}</p>
                                     <ul class="list-inline">
                                     <li *ngIf="data.website.length>0">
                                         <a class="btn-social btn-outline" href="{{data.website}}"><i class="fa fa-fw fa-desktop"></i></a>

@@ -161,7 +161,14 @@ section {
 
 .panel-heading{
     height: 150px;
+    width: 150px;
+    border-radius: 50%;
     background-size: cover;
+    margin:0 auto;
+}
+
+.panel-text {
+    font-size: 17px;
 }
 
 .list-group-item p {
