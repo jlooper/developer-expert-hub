@@ -18,24 +18,39 @@
                         <div class="row control-group">
                             <div class="form-group">
                                 <label class="required" for="fname">First Name</label>
-                                <input type="text" class="form-control" (ngModel)="fname" placeholder="First Name" id="fname" name="fname" required data-validation-required-message="First Name is required.">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="fname" placeholder="First Name" id="fname" name="fname" #fname="ngModel" required data-validation-required-message="First Name is required.">
+                                <div *ngIf="fname.errors && (fname.dirty || fname.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!fname.errors.required">
+                                        First name is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="row control-group">
                             <div class="form-group">
                                 <label class="required" for="lname">Last Name</label>
-                                <input type="text" class="form-control" (ngModel)="lname" placeholder="Last Name" id="lname" name="lname" required data-validation-required-message="Last Name is required.">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="lname" placeholder="Last Name" id="lname" name="lname" #lname="ngModel" required data-validation-required-message="Last Name is required.">
+                                <div *ngIf="lname.errors && (lname.dirty || lname.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!lname.errors.required">
+                                        Last name is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="email">Email</label>
-                                <input type="text" class="form-control" (ngModel)="email" placeholder="Email" id="email" name="email" required data-validation-required-message="Email is required.">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="email" placeholder="Email" id="email" name="email" #email="ngModel" required data-validation-required-message="Email is required.">
+                                <div *ngIf="email.errors && (email.dirty || email.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!email.errors.required">
+                                        Email is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -43,8 +58,13 @@
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="address1">Street Address</label>
-                                <input type="text" class="form-control" (ngModel)="address1" placeholder="Street Address 1" id="address1" name="address1" required data-validation-required-message="Address is required.">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="address1" placeholder="Street Address 1" id="address1" name="address1" #address1="ngModel" required data-validation-required-message="Address is required.">
+                                <div *ngIf="address1.errors && (address1.dirty || address1.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!address1.errors.required">
+                                        Address is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -59,40 +79,65 @@
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="city">City</label>
-                                <input type="text" class="form-control" (ngModel)="city" placeholder="City" id="city" name="city">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="city" placeholder="City" id="city" name="city" #city="ngModel" required>
+                                <div *ngIf="city.errors && (city.dirty || city.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!city.errors.required">
+                                        City is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="state">State/Province/Region</label>
-                                <input type="text" class="form-control" (ngModel)="state" placeholder="State, Province, or Region" id="state" name="state">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="state" placeholder="State, Province, or Region" id="state" name="state" #state="ngModel" required>
+                                <div *ngIf="state.errors && (state.dirty || state.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!state.errors.required">
+                                        State or Province is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="postalcode">Zip/Postal Code</label>
-                                <input type="text" class="form-control" (ngModel)="postalcode" placeholder="Postal Code or Zip Code" id="postalcode" name="postalcode">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="postalcode" placeholder="Postal Code or Zip Code" id="postalcode" name="postalcode" #postalcode="ngModel" required>
+                                <div *ngIf="postalcode.errors && (postalcode.dirty || postalcode.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!postalcode.errors.required">
+                                        Postal or Zip Code is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="country">Country</label>
-                                <input type="text" class="form-control" (ngModel)="country" placeholder="Country" id="country" name="country">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="country" placeholder="Country" id="country" name="country" #country="ngModel" required>
+                                <div *ngIf="country.errors && (country.dirty || country.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!country.errors.required">
+                                        Country is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="phone">Phone</label>
-                                <input type="text" class="form-control" (ngModel)="phone" placeholder="Phone" id="phone" name="phone" required data-validation-required-message="Phone is required.">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="phone" placeholder="Phone" id="phone" name="phone" #phone="ngModel" required>
+                                <div *ngIf="phone.errors && (phone.dirty || phone.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!phone.errors.required">
+                                        Phone is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -101,24 +146,39 @@
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="company">Company</label>
-                                <input type="text" class="form-control" (ngModel)="company" placeholder="Company" id="company" name="company" required data-validation-required-message="Company Name is required.">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="company" placeholder="Company" id="company" name="company" #company="ngModel" required>
+                                <div *ngIf="company.errors && (company.dirty || company.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!company.errors.required">
+                                        Company is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required" for="title">Job Title</label>
-                                <input type="text" class="form-control" (ngModel)="title" placeholder="Job Title" id="title" name="title" required data-validation-required-message="Title is required.">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="title" placeholder="Job Title" id="title" name="title" #title="ngModel" required>
+                                <div *ngIf="title.errors && (title.dirty || title.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!title.errors.required">
+                                        Title is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label for="website">Website / Blog (full URL)</label>
-                                <input type="text" class="form-control" (ngModel)="website" placeholder="e.g.: http://www.myblog.com" id="website" name="website">
-                                <p class="help-block text-danger"></p>
+                                <input type="text" class="form-control" (ngModel)="website" placeholder="e.g.: http://www.myblog.com" id="website" name="website" #website="ngModel" required>
+                                <div *ngIf="website.errors && (website.dirty || website.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!website.errors.required">
+                                        Website is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -126,7 +186,6 @@
                             <div class="form-group ">
                                 <label for="twitter">Twitter handle (no '@' necessary)</label>
                                 <input type="text" class="form-control" (ngModel)="twitter" placeholder="e.g.: myTwitterHandle" id="twitter" name="twitter">
-                                <p class="help-block text-danger"></p>
                             </div>
                         </div>
 
@@ -134,15 +193,19 @@
                             <div class="form-group ">
                                 <label for="github">Github profile (just the handle)</label>
                                 <input type="text" class="form-control" (ngModel)="github" placeholder="e.g.: myGithubHandle" id="github" name="github">
-                                <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         
                         <div class="row control-group">
                             <div class="form-group ">
                                 <label class="required"  for="password">Choose a Password</label>
-                                <input type="password" class="form-control" (ngModel)="password" placeholder="Password" id="password" name="password" required data-validation-required-message="Password is required.">
-                                <p class="help-block text-danger"></p>
+                                <input type="password" class="form-control" (ngModel)="password" placeholder="Password" id="password" name="password" #password="ngModel" required>
+                                <div *ngIf="password.errors && (password.dirty || password.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!password.errors.required">
+                                        Password is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -178,8 +241,13 @@
 
                         <div class="row control-group">
                             <div class="form-group ">
-                                <textarea rows="5" class="form-control" (ngModel)="bio" placeholder="Tell us about yourself!" id="bio" name="bio" required data-validation-required-message="Bio is required."></textarea>
-                                <p class="help-block text-danger"></p>
+                                <textarea rows="5" class="form-control" (ngModel)="bio" placeholder="Tell us about yourself!" id="bio" name="bio" #bio="ngModel" required></textarea>
+                                <div *ngIf="bio.errors && (bio.dirty || bio.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!bio.errors.required">
+                                        Bio is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
                                                                   
@@ -187,8 +255,13 @@
                          
                         <div class="row control-group">
                             <div class="form-group ">
-                                <input id="image" name="image" type="file" (ngModel)="image" (change)="fileChange($event)" placeholder="Upload file" accept=".png,.jpg">
-                                <p class="help-block text-danger"></p>
+                                <input id="image" name="image" type="file" (ngModel)="image" (change)="fileChange($event)" placeholder="Upload file" accept=".png,.jpg" #image="ngModel" required>
+                                <div *ngIf="image.errors && (image.dirty || image.touched)"
+                                    class="alert alert-danger">
+                                    <div [hidden]="!image.errors.required">
+                                        Image is required
+                                    </div>
+                                </div>
                             </div>
                         </div>                          
                         
