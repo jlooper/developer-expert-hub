@@ -159,7 +159,7 @@ section {
     padding-top: 120px;
 }
 
-.panel-heading{
+.expert-image {
     height: 150px;
     width: 150px;
     border-radius: 50%;
@@ -399,6 +399,10 @@ footer .footer-below {
 
 .scroll-top .btn:focus {
     outline: 0;
+}
+
+.pad-right {
+    padding-right: 5px;
 }
 
 /*.portfolio-modal .modal-content {
