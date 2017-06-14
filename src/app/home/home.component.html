@@ -11,7 +11,7 @@
                             <div class="caption">
                                 <div *ngFor="let data of generateArray(user.User)">
                                     <h3>{{data.fname}} {{data.lname}}</h3>
-                                    <div class="panel-heading text-center" [ngStyle]="{ 'background-image': 'url(' + data.image + ')'}"></div> 
+                                    <div class="expert-image text-center" [ngStyle]="{ 'background-image': 'url(' + data.image + ')'}"></div> 
                                     <p class="panel-text">{{data.title}} at {{data.company}}</p>
                                     <ul class="list-inline">
                                     <li *ngIf="data.website.length>0">
