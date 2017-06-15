@@ -7,21 +7,21 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="panel panel-info">
-                    <div class="panel-heading">My Profile</div>
+                    <div class="panel-heading"><h3>My Profile</h3></div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div>
                                 <p><span class="fa fa-user pad-right"></span>{{ name }}</p>
                                 <p><span class="fa fa-envelope pad-right"></span>{{ email }}</p>
                                 <p><span class="fa fa-building pad-right"></span>{{ company }}</p>
                             </div>
-                            <ul class="col-lg-3" *ngFor="let item of expertise">
+                            <ul *ngFor="let item of expertise">
                                 <li>{{item}}</li>
                             </ul>
                         </div>
-                        <div class="row col-lg-offset-1">
+                        <div class="row">
                             <blockquote>
                                 <p>{{ bio }}</p>
                             </blockquote>
@@ -29,14 +29,12 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
+        
             <div *ngIf="(activities | async)?.length > 0" class="col-lg-6">
                 <div class="panel panel-success">
-                    <div class="panel-heading">My Activities</div>
+                    <div class="panel-heading"><h3>My Activities</h3></div>
                     <div class="panel-body">
-                        <ul *ngFor="let activity of activities | async">
+                        <ul class="panel-list"  *ngFor="let activity of activities | async">
                             <li>{{activity.date | date : 'MM/dd/yyyy'}} - <a href="{{activity.activity}}">{{ activity.activity }}</a></li>
                         </ul>
                     </div>
@@ -45,9 +43,9 @@
 
             <div *ngIf="(requests | async)?.length > 0" class="col-lg-6">
                 <div class="panel panel-success">
-                    <div class="panel-heading">My Requests</div>
+                    <div class="panel-heading"><h3>My Requests</h3></div>
                     <div class="panel-body">
-                        <ul *ngFor="let request of requests | async">
+                        <ul class="panel-list" *ngFor="let request of requests | async">
                             <li>{{request.date | date : 'MM/dd/yyyy'}} - {{ request.request }}</li>
                         </ul>
                     </div>

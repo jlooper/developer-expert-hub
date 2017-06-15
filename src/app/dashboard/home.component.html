@@ -5,18 +5,22 @@
                 <h2>Developer Experts</h2>
             </div>
         </div>
-        <div class="row">
-            <h3>Most Recent Activities</h3>
-            <div *ngFor="let user of users">
-                <div *ngFor="let data of generateArray(user.User)">
-                    <p>{{data.fname}} {{data.lname}}</p>
+         <div class="panel panel-info">
+            <div class="panel-heading"><h3>Most Recent Activities</h3></div>
+                <div class="panel-body">
+                    <div class="row">
+                        
+                        <div *ngFor="let user of users">
+                            <div *ngFor="let data of generateArray(user.User)">
+                                <p>{{data.fname}} {{data.lname}}</p>
+                            </div>
+                            <div *ngFor="let data of generateArray(user.Activities)">
+                                <li>{{data.date | date : 'MM/dd/yyyy'}} - <a href="{{data.activity}}">{{ data.activity }}</a></li>
+                            </div>
+                            <hr/>
+                        </div>
+                    </div>
                 </div>
-                <div *ngFor="let data of generateArray(user.Activities)">
-                    <li>{{data.date | date : 'MM/dd/yyyy'}} - <a href="{{data.activity}}">{{ data.activity }}</a></li>
-                </div>
-                <hr/>
             </div>
-            
         </div>
-    </div>
 </section>
