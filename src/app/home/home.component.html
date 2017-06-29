@@ -7,7 +7,7 @@
         </div>
         <div class="row">
 
-            <div *ngFor="let user of users">
+            <div *ngFor="let user of members">
                 <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item">
 
                     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
@@ -18,7 +18,22 @@
                                     <span class="circle">
                                         <div class="expert-image" [ngStyle]="{ 'background-image': 'url(' + data.image + ')'}"></div>
                                     </span>
-                                    <p class="panel-text">{{data.title}}<br/>{{data.company}}</p>
+                                    <p class="panel-text">{{data.title}}<br/>{{data.company}}<br/>{{data.city}}, {{data.country}}</p>
+                                    <div class="logos" *ngFor="let item of data.expertise">
+                                        <span class="logo" *ngIf="item == 'NativeScript'"><img src="/assets/img/nativescript.png"/></span>
+                                        <span class="logo" *ngIf="item == 'Kendo UI'"><img src="/assets/img/kendo-ui.png"/></span>
+                                        <span class="logo" *ngIf="item == 'MobileDevelopment'"><img src="/assets/img/mobile.png"/></span>
+                                        <span class="logo" *ngIf="item == 'WebDevelopment'"><img src="/assets/img/web.png"/></span>
+
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+                            <div class="card back">
+                                <div *ngFor="let data of generateArray(user.User)">
+                                    {{data.bio}}
+                                    <hr/>
                                     <ul class="list-inline">
                                         <li *ngIf="data.website?.length>0">
                                             <a class="btn-social btn-outline" href="{{data.website}}"><i class="fa fa-fw fa-desktop"></i></a>
@@ -31,12 +46,6 @@
                                         </li>
 
                                     </ul>
-                                </div>
-                            </div>
-
-                            <div class="card back">
-                                <div *ngFor="let data of generateArray(user.User)">
-                                    {{data.bio}}
                                 </div>
                             </div>
                         </div>

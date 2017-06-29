@@ -226,6 +226,14 @@ section.success {
     padding: 10px;
 }
 
+.logos {
+    display: inline;
+}
+.logo {
+    padding: 2px;
+    font-size: 20px;
+}
+
 /*CARD FLIP*/
 .flip-container {
 	perspective: 1000px;

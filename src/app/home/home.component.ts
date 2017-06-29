@@ -1,8 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import {DomSanitizer} from '@angular/platform-browser';
-
+import { Users } from '../models/users';
 
 @Component({
   selector: 'home',
@@ -12,7 +13,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class HomeComponent implements OnInit {
  
   private profiles: FirebaseListObservable<any[]>;
-  users: Array<any[]>;
+  members: Array<Users> = [];
 
   cleanedImage: any;
   private sub:any;
@@ -21,21 +22,25 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(){
       //show only profiles with activities
-      this.profiles = this.db.list('/Profile/');
+      this.profiles = this.db.list('/Profile');
       this.profiles.subscribe(queriedItems => {
-        this.users = [];
+        this.members = [];
         for (let prop in queriedItems){
-          let member = this.generateArray(queriedItems[prop].User)
-          if (member[0].member){
-            this.users.push(queriedItems[prop])
+          let member = this.generateArray(queriedItems[prop].User);
+          if (member[0].member && !member[0].admin){
+            this.members.push(queriedItems[prop])
             this.cleanedImage = this.sanitizer.bypassSecurityTrustUrl(queriedItems[prop].image);
             queriedItems[prop].image = this.cleanedImage.changingThisBreaksApplicationSecurity;
           }
         }
       });
     }
+
     generateArray(obj){
-      return Object.keys(obj).map((key)=>{ return obj[key]});
+      //sort
+      return Object.keys(obj).map(
+        (key) => { return obj[key] }
+      );
     }
 
 }
