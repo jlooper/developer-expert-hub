@@ -9,44 +9,37 @@
 
             <div *ngFor="let user of members">
                 <div class="col-xs-12 col-sm-6 col-md-4 portfolio-item">
-
                     <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
                         <div class="flipper">
                             <div class="card front">
-                                <div *ngFor="let data of generateArray(user.User)">
-                                    <h3>{{data.fname}} {{data.lname}}</h3>
-                                    <span class="circle">
-                                        <div class="expert-image" [ngStyle]="{ 'background-image': 'url(' + data.image + ')'}"></div>
+                                <h3>{{user.fname}} {{user.lname}}</h3>
+                                <span class="circle">
+                                        <div class="expert-image" [ngStyle]="{ 'background-image': 'url(' + user.image + ')'}"></div>
                                     </span>
-                                    <p class="panel-text">{{data.title}}<br/>{{data.company}}<br/>{{data.city}}, {{data.country}}</p>
-                                    <div class="logos" *ngFor="let item of data.expertise">
-                                        <span class="logo" *ngIf="item == 'NativeScript'"><img src="/assets/img/nativescript.png"/></span>
-                                        <span class="logo" *ngIf="item == 'Kendo UI'"><img src="/assets/img/kendo-ui.png"/></span>
-                                        <span class="logo" *ngIf="item == 'MobileDevelopment'"><img src="/assets/img/mobile.png"/></span>
-                                        <span class="logo" *ngIf="item == 'WebDevelopment'"><img src="/assets/img/web.png"/></span>
-
-                                    </div>
+                                <p class="panel-text">{{user.title}}<br/>{{user.company}}<br/>{{user.city}}, {{user.country}}</p>
+                                <div class="logos" *ngFor="let item of user.expertise">
+                                    <span class="logo" *ngIf="item == 'NativeScript'"><img src="/assets/img/nativescript.png"/></span>
+                                    <span class="logo" *ngIf="item == 'Kendo UI'"><img src="/assets/img/kendo-ui.png"/></span>
+                                    <span class="logo" *ngIf="item == 'MobileDevelopment'"><img src="/assets/img/mobile.png"/></span>
+                                    <span class="logo" *ngIf="item == 'WebDevelopment'"><img src="/assets/img/web.png"/></span>
                                 </div>
-                            
                             </div>
 
                             <div class="card back">
-                                <div *ngFor="let data of generateArray(user.User)">
-                                    {{data.bio}}
-                                    <hr/>
-                                    <ul class="list-inline">
-                                        <li *ngIf="data.website?.length>0">
-                                            <a class="btn-social btn-outline" href="{{data.website}}"><i class="fa fa-fw fa-desktop"></i></a>
-                                        </li>
-                                        <li *ngIf="data.twitter?.length>0">
-                                            <a class="btn-social btn-outline" href="http://www.twitter.com/{{data.twitter}}"><i class="fa fa-fw fa-twitter"></i></a>
-                                        </li>
-                                        <li *ngIf="data.github?.length>0">
-                                            <a class="btn-social btn-outline" href="http://www.github.com/{{data.github}}"><i class="fa fa-fw fa-github"></i></a>
-                                        </li>
+                                {{user.bio}}
+                                <hr/>
+                                <ul class="list-inline">
+                                    <li *ngIf="user.website?.length>0">
+                                        <a class="btn-social btn-outline" href="{{user.website}}"><i class="fa fa-fw fa-desktop"></i></a>
+                                    </li>
+                                    <li *ngIf="user.twitter?.length>0">
+                                        <a class="btn-social btn-outline" href="http://www.twitter.com/{{user.twitter}}"><i class="fa fa-fw fa-twitter"></i></a>
+                                    </li>
+                                    <li *ngIf="user.github?.length>0">
+                                        <a class="btn-social btn-outline" href="http://www.github.com/{{user.github}}"><i class="fa fa-fw fa-github"></i></a>
+                                    </li>
 
-                                    </ul>
-                                </div>
+                                </ul>
                             </div>
                         </div>
                     </div>

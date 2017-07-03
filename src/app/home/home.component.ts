@@ -28,12 +28,32 @@ export class HomeComponent implements OnInit {
         for (let prop in queriedItems){
           let member = this.generateArray(queriedItems[prop].User);
           if (member[0].member && !member[0].admin){
-            this.members.push(queriedItems[prop])
-            this.cleanedImage = this.sanitizer.bypassSecurityTrustUrl(queriedItems[prop].image);
+            this.cleanedImage = this.sanitizer.bypassSecurityTrustUrl(member[0].image);
             queriedItems[prop].image = this.cleanedImage.changingThisBreaksApplicationSecurity;
+            queriedItems[prop].fname = member[0].fname;
+            queriedItems[prop].lname = member[0].lname;
+            queriedItems[prop].title = member[0].title;
+            queriedItems[prop].company = member[0].company;
+            queriedItems[prop].city = member[0].city;
+            queriedItems[prop].country = member[0].country;
+            queriedItems[prop].expertise = member[0].expertise;
+            queriedItems[prop].bio = member[0].bio;
+            queriedItems[prop].github = member[0].github;
+            queriedItems[prop].twitter = member[0].twitter;
+            queriedItems[prop].website = member[0].website;
+            this.members.push(queriedItems[prop])
           }
         }
+        this.members.sort(this.alphabetize('lname'));
       });
+    }
+
+    alphabetize(key) {
+      return function(a,b){
+      if (a[key] > b[key]) return 1;
+      if (a[key] < b[key]) return -1;
+      return 0;
+      }
     }
 
     generateArray(obj){
