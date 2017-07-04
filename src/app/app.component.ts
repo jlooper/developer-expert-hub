@@ -16,6 +16,7 @@ user: Observable<firebase.User>;
 
 id: any;
 member: boolean;
+admin: boolean;
 error: string;
 environment = window.location.hostname;
   
@@ -28,7 +29,7 @@ constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth, pri
           queryObservable.subscribe(queriedItems => {
             console.log(queriedItems[0])
               this.member = queriedItems[0].member; 
-              console.log("I'm a member",this.member)
+              this.admin = queriedItems[0].admin;
           });
       }
 });

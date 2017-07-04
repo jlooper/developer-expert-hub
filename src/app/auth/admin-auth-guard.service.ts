@@ -8,9 +8,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @Injectable()
-export class AuthGuard implements CanActivate{
+export class AdminAuthGuard implements CanActivate{
   public error: string;
-  member: boolean;
+  admin: boolean;
   id; any;
   user: Observable<firebase.User>;
 
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate{
           this.id = user.uid;
           const queryObservable = this.db.list('/Profile/'+this.id+'/User');
             queryObservable.subscribe(queriedItems => {
-                this.member = queriedItems[0].member; 
+                this.admin = queriedItems[0].member; 
             });
         }
     });
@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     
     return this.user.map((user) =>  {
-      if(user == null || !this.member) {
+      if(user == null || !this.admin) {
         this.router.navigate(['/login']);
         return false;
       } else {

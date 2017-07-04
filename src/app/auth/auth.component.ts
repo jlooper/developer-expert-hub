@@ -55,7 +55,6 @@ user: Observable<firebase.User>;
         }
       }
     }
-    console.log(this.expertise)
   }
 
   fileChange(event) {
