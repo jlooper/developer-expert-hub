@@ -11,13 +11,13 @@ import { AppComponent, PageNotFoundComponent } from './app.component';
 
 import { AuthModule } from './auth/auth.module';
 import { DashModule } from './dashboard/dashboard.module';
-import { AdminModule } from './admin/admin.module';
+import { AdminDashModule } from './admin/admin-dashboard.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRouting } from './app.routing';
 
-import { AdminComponent } from './admin/admin.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 
@@ -38,7 +38,7 @@ export const config = {
     AngularFireAuthModule,
     AuthModule,
     DashModule,
-    AdminModule,
+    AdminDashModule,
     AppRouting,
     CommonModule,
     BrowserAnimationsModule

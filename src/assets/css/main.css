@@ -469,3 +469,26 @@ footer .footer-below {
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }*/
+
+/*table*/
+#members-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#members-table td, #members-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#members-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#members-table tr:hover {background-color: #ddd;}
+
+#members-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}

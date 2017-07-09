@@ -21,7 +21,7 @@ export class AdminAuthGuard implements CanActivate{
           this.id = user.uid;
           const queryObservable = this.db.list('/Profile/'+this.id+'/User');
             queryObservable.subscribe(queriedItems => {
-                this.admin = queriedItems[0].member; 
+                this.admin = queriedItems[0].admin; 
             });
         }
     });
@@ -31,7 +31,7 @@ export class AdminAuthGuard implements CanActivate{
     
     return this.user.map((user) =>  {
       if(user == null || !this.admin) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/admin']);
         return false;
       } else {
         return true;

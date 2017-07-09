@@ -4,8 +4,16 @@
     <div class="container">
         
         <a class="navbar-brand" href="/"><img src="/assets/img/logo.png"></a>
+        
+        <!--if not logged in and not a member or admin-->
+        <span *ngIf="!(user | async) || (!member && !admin)">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-item button"><a routerLink="/login">Login</a></li>
+                <li class="navbar-item button"><a routerLink="/signup">Join</a></li>
+            </ul>
+        </span>
         <!--if logged in and a member -->
-        <span *ngIf="(user | async) && (member || admin)">
+        <span *ngIf="(user | async) && member && !admin">
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-item button"><a routerLink="/dashboard/">Home</a></li>
                 <li class="navbar-item button"><a routerLink="/dashboard/account">My Account</a></li>
@@ -14,11 +22,13 @@
                 <li class="navbar-item button"><a (click)="logout()" routerLink="/">Logout</a></li>
             </ul>
         </span>
-        <!--if not logged in and not a member-->
-        <span *ngIf="!(user | async) || !member">
+        <!--if logged in and admin-->
+        <span *ngIf="(user | async) && admin">
             <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-item button"><a routerLink="/login">Login</a></li>
-                <li class="navbar-item button"><a routerLink="/signup">Join</a></li>
+                <li class="navbar-item button"><a routerLink="/admin/">Admin Home</a></li>
+                <li class="navbar-item button"><a routerLink="/admin/members">All Members</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/">Dashboard</a></li>
+                <li class="navbar-item button"><a (click)="logout()" routerLink="/">Logout</a></li>
             </ul>
         </span>
     </div>
@@ -32,6 +42,7 @@
 <div *ngIf="this.environment == 'localhost'" class="menu-centered">
     <ul class="menu">
         <li>member? {{member}}</li>
+        <li>admin? {{ admin }}</li>
         <li *ngIf="user | async">LOGGED IN</li>
         <li *ngIf="!(user | async)">NOT LOGGED IN</li>
     </ul>
