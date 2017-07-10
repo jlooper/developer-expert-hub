@@ -49,11 +49,20 @@ export class AccountComponent {
     currUser: FirebaseListObservable<any[]>;
     activities: FirebaseListObservable<any[]>;
     requests: FirebaseListObservable<any[]>;
+    checkins: FirebaseListObservable<any[]>;
     name: string;
     company: string;
+    title: string;
     bio: string;
     expertise: string;
     email: string;
+    address1: string;
+    address2: string;
+    city: string;
+    state: string;
+    postalcode: string;
+    country: string;
+    phone: string;
     id: any;
     
     constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
@@ -67,13 +76,21 @@ export class AccountComponent {
                   for (let prop in queriedItems){
                       this.name = queriedItems[prop].fname + ' ' + queriedItems[prop].lname;
                       this.company = queriedItems[prop].company;
+                      this.title = queriedItems[prop].title;
+                      this.address1 = queriedItems[prop].address1;
+                      this.address2 = queriedItems[prop].address2;
+                      this.city = queriedItems[prop].city;
+                      this.state = queriedItems[prop].state;
+                      this.country = queriedItems[prop].country;
+                      this.postalcode = queriedItems[prop].postalcode;
+                      this.phone = queriedItems[prop].phone;
                       this.bio = queriedItems[prop].bio;
                       this.expertise = queriedItems[prop].expertise;
                   }  
               });
         this.activities = this.db.list('/Profile/'+this.id+'/Activities');
         this.requests = this.db.list('/Profile/'+this.id+'/Requests');
-
+        this.checkins = this.db.list('/Profile/'+this.id+'/Checkins');
       }
     });
   }
@@ -185,13 +202,13 @@ export class CheckinsComponent {
   error: string;
   continue: string;
 
-constructor(private http: Http, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
-    this.user = afAuth.authState;
+constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+      this.user = afAuth.authState;
       this.user.subscribe((user: firebase.User) => {
       if(user != null){
         this.id = user.uid;
-    }
-  })
+      }
+    });
 }
 
 handleChange(status,value){

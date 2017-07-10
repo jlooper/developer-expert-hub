@@ -15,8 +15,20 @@
                             <div>
                                 <p><span class="fa fa-user pad-right"></span>{{ name }}</p>
                                 <p><span class="fa fa-envelope pad-right"></span>{{ email }}</p>
-                                <p><span class="fa fa-building pad-right"></span>{{ company }}</p>
+                                <p><span class="fa fa-building pad-right"></span>{{ title }} at {{ company }}</p>
+                                <p><span class="fa fa-home pad-right"></span>Home Address</p>
+                                <blockquote>
+                                    {{ address1 }} {{ address2 }}<br/>
+                                    {{ city }}<br/>
+                                    {{ state }}<br/>
+                                    {{ postalcode }}<br/>
+                                    {{ country }}<br/>
+                                    {{ phone }}
+                                </blockquote>
+                                
+
                             </div>
+                            <p><span class="fa fa-gear pad-right"></span>Expertise</p>
                             <ul *ngFor="let item of expertise">
                                 <li>{{item}}</li>
                             </ul>
@@ -47,6 +59,19 @@
                     <div class="panel-body">
                         <ul class="panel-list" *ngFor="let request of requests | async">
                             <li>{{request.date | date : 'MM/dd/yyyy'}} - {{ request.request }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="(checkins | async)?.length > 0" class="col-lg-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading"><h3>My Checkins</h3></div>
+                    <div class="panel-body">
+                        <ul class="panel-list" *ngFor="let checkin of checkins | async">
+                            <li>Checkin date: {{checkin.date}}</li>
+                            <li>My activities: {{checkin.activities}}</li>
+                            <li>My feedback: {{checkin.feedback}}</li>
                         </ul>
                     </div>
                 </div>

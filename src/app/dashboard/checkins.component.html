@@ -5,6 +5,7 @@
                     <h2>Checkin</h2>
                 </div>
             </div>
+        
             <div class="form row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <div *ngIf="success" class="alert alert-success text-center">{{success}}</div>
@@ -14,7 +15,7 @@
                         <div class="row control-group">
                             <div class="form-group">
                                 <h3 class="required" for="activities">Activities</h3>
-                                <h5>Please list your most significant activities between January and July of this year, such as conference talks, blogposts, or activity on social media for Telerik/Progress products</h5>
+                                <p>Please list your most significant activities between January and July of this year, such as conference talks, blogposts, or activity on social media for Telerik/Progress products. Your most recent activities can be found <a routerLink="/dashboard/account">here</a>.</p>
                                 <textarea rows="10" class="form-control" (ngModel)="activities" placeholder="My most recent activities" id="activities" name="activities" #activities="ngModel" required></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -22,8 +23,8 @@
                         <div class="row control-group">
                             <div class="form-group">
                                 <h3 class="required" for="feedback">Feedback</h3>
-                                <h5>Please let me know what you think of the program. What suggestions can you make to improve it? How can I help you?</h5>
-                                <input class="form-control" (ngModel)="feedback" placeholder="My feedback" id="feedback" name="feedback" required data-validation-required-message="Please give us feedback."/>
+                                <p>Please let me know what you think of the program. What suggestions can you make to improve it? How can I help you?</p>
+                                <textarea rows="3" class="form-control" (ngModel)="feedback" placeholder="My feedback" id="feedback" name="feedback" #feedback="ngModel" required></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -51,5 +52,5 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div>            
     </section>
