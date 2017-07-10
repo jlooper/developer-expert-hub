@@ -6,7 +6,7 @@ import { AuthGuard } from '../auth/auth-guard.service';
 import { HttpModule } from '@angular/http';
 import { dashRouting } from './dashboard.routing';
 import { DashboardComponent } from './dashboard.component';
-import { HomeComponent, AccountComponent, ActivitiesComponent, RequestComponent } from './child.component';
+import { HomeComponent, AccountComponent, ActivitiesComponent, RequestComponent, CheckinsComponent } from './child.component';
 
 @NgModule({
   imports:      [ 
@@ -21,7 +21,8 @@ import { HomeComponent, AccountComponent, ActivitiesComponent, RequestComponent 
     AccountComponent,
     HomeComponent,
     ActivitiesComponent,
-    RequestComponent
+    RequestComponent,
+    CheckinsComponent
   ]
 })
 export class DashModule { }

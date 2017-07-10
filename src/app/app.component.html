@@ -17,6 +17,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-item button"><a routerLink="/dashboard/">Home</a></li>
                 <li class="navbar-item button"><a routerLink="/dashboard/account">My Account</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/checkins">Checkin</a></li>
                 <li class="navbar-item button"><a routerLink="/dashboard/activities">Activities</a></li>
                 <li class="navbar-item button"><a routerLink="/dashboard/requests">Requests</a></li>
                 <li class="navbar-item button"><a (click)="logout()" routerLink="/">Logout</a></li>
@@ -26,8 +27,11 @@
         <span *ngIf="(user | async) && admin">
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-item button"><a routerLink="/admin/">Admin Home</a></li>
-                <li class="navbar-item button"><a routerLink="/admin/members">All Members</a></li>
-                <li class="navbar-item button"><a routerLink="/dashboard/">Dashboard</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/">Member Home</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/account">My Account</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/checkins">Checkin</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/activities">Activities</a></li>
+                <li class="navbar-item button"><a routerLink="/dashboard/requests">Requests</a></li>
                 <li class="navbar-item button"><a (click)="logout()" routerLink="/">Logout</a></li>
             </ul>
         </span>
@@ -36,8 +40,8 @@
 </div>
 
 </nav>
-
-    <router-outlet></router-outlet>
+    
+<router-outlet></router-outlet>
 
 <div *ngIf="this.environment == 'localhost'" class="menu-centered">
     <ul class="menu">

@@ -171,3 +171,46 @@ onSubmit(formData){
   }
 }
 
+/*checkin*/
+@Component({
+  selector: 'checkins',
+  templateUrl: 'checkins.component.html'
+})
+    
+export class CheckinsComponent { 
+  
+  user: Observable<firebase.User>;
+  id: any;
+  success: string;
+  error: string;
+  continue: string;
+
+constructor(private http: Http, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+    this.user = afAuth.authState;
+      this.user.subscribe((user: firebase.User) => {
+      if(user != null){
+        this.id = user.uid;
+    }
+  })
+}
+
+handleChange(status,value){
+    if(status){
+      this.continue=value;
+    }
+  }
+  
+onSubmit(formData){
+//push to the user's id within the Requests object
+    const data = this.db.list('/Profile/'+this.id+'/Checkins')
+      data.push({ activities: formData.value.activities, date: '7/2017', continue: formData.value.continue, feedback: formData.value.feedback })
+    .then(
+        (success) => {
+        this.success = "Checkin logged! Thank you!";
+      }).catch(
+        (err) => {
+        this.error = err.message;
+      })
+  }
+}
+

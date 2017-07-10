@@ -2,7 +2,7 @@ import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
-import { HomeComponent, AccountComponent, ActivitiesComponent, RequestComponent } from './child.component';
+import { HomeComponent, AccountComponent, ActivitiesComponent, RequestComponent, CheckinsComponent } from './child.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 
 const appRoutes: Routes = [
@@ -13,7 +13,8 @@ const appRoutes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'account', component: AccountComponent },
       { path: 'requests', component: RequestComponent },
-      { path: 'activities', component: ActivitiesComponent }
+      { path: 'activities', component: ActivitiesComponent },
+      { path: 'checkins', component: CheckinsComponent}
     ]
   },
 ];
