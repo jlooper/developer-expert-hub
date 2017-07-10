@@ -6,7 +6,7 @@ import { AdminAuthGuard } from './admin-auth-guard.service';
 import { HttpModule } from '@angular/http';
 import { admindashRouting } from './admin-dashboard.routing';
 import { AdminDashboardComponent } from './admin-dashboard.component';
-import { AdminHomeComponent, AdminMembersComponent } from './admin-child.component';
+import { AdminHomeComponent, AdminMembersComponent, AdminCheckinsComponent } from './admin-child.component';
 
 @NgModule({
   imports:      [ 
@@ -19,7 +19,8 @@ import { AdminHomeComponent, AdminMembersComponent } from './admin-child.compone
   declarations: [ 
     AdminDashboardComponent,
     AdminHomeComponent,
-    AdminMembersComponent
+    AdminMembersComponent,
+    AdminCheckinsComponent
   ]
 })
 export class AdminDashModule { }

@@ -2,7 +2,7 @@ import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminDashboardComponent } from './admin-dashboard.component';
-import { AdminHomeComponent, AdminMembersComponent } from './admin-child.component';
+import { AdminHomeComponent, AdminCheckinsComponent, AdminMembersComponent } from './admin-child.component';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 
 const appRoutes: Routes = [
@@ -12,8 +12,8 @@ const appRoutes: Routes = [
     children: [
       { path: '', component: AdminHomeComponent },
       { path: 'members', component: AdminMembersComponent },
-      { path: 'members/:id', component: AdminMembersComponent }/*,
-      { path: 'activities', component: ActivitiesComponent }*/
+      { path: 'members/:id', component: AdminMembersComponent },
+      { path: 'checkins', component: AdminCheckinsComponent }
     ]
   },
 ];

@@ -128,5 +128,35 @@ export class AdminMembersComponent implements OnInit {
         (key) => { return obj[key] }
       );
     }
+}
+/*checkins*/
 
+@Component({
+  selector: 'admin-checkins',
+  templateUrl: 'admin-checkins.component.html'
+})
+
+export class AdminCheckinsComponent implements OnInit { 
+    
+  private profiles: FirebaseListObservable<any[]>;
+  users: Array<any[]>;
+
+  constructor(private db: AngularFireDatabase) {}
+
+  ngOnInit(){
+    //show only profiles with checkins
+    this.profiles = this.db.list('/Profile/');
+    this.profiles.subscribe(queriedItems => {
+      this.users = [];
+      for (let prop in queriedItems){
+        if (queriedItems[prop].Checkins){
+          this.users.push(queriedItems[prop])
+        }
+      }
+    });
+  }
+  generateArray(obj){
+   return Object.keys(obj).map((key)=>{ return obj[key]});
+  }
+  
 }

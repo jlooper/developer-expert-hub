@@ -1,63 +1,22 @@
 <section id="page">
-  <div class="container">
-    
-    <div class="row">
-        <ul class="nav nav-pills text-center">
-          <li role="presentation"><a routerLink="/admin/members">All Members</a></li>
-          <li role="presentation"><a routerLink="/admin/feedback">Feedback</a></li>
-          <li role="presentation"><a routerLink="/admin/requests">Requests</a></li>
-          <li role="presentation"><a routerLink="/admin/activities">Activities</a></li>
-        </ul>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h2>Admin</h2>
-      </div>
-    </div>
-
-    <ng-template #elseBlock>
-      <div class="text-center">There are no new members for approval at this time</div>
-    </ng-template>
-
-
-
-    <div *ngIf="members?.length > 0; else elseBlock" class="row">
-
-      <div *ngFor="let user of members">
-        <div class="col-lg-6">
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3>{{user.fname}} {{user.lname}}</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>All Checkins</h2>
             </div>
-            <div class="panel-body">
-              <span class="circle">
-                  <div class="expert-image" [ngStyle]="{ 'background-image': 'url(' + user.image + ')'}"></div>
-              </span>
-              <p class="panel-text">{{user.title}}<br/>{{user.company}}<br/>{{user.city}}, {{user.country}}</p>
-              <div class="logos" *ngFor="let item of user.expertise">
-                <span class="logo" *ngIf="item == 'NativeScript'"><img src="/assets/img/nativescript.png"/></span>
-                <span class="logo" *ngIf="item == 'Kendo UI'"><img src="/assets/img/kendo-ui.png"/></span>
-                <span class="logo" *ngIf="item == 'MobileDevelopment'"><img src="/assets/img/mobile.png"/></span>
-                <span class="logo" *ngIf="item == 'WebDevelopment'"><img src="/assets/img/web.png"/></span>
-              </div>
-              <p>{{user.bio}}</p>
-              <hr/>
-              <ul class="list-inline">
-                <li *ngIf="user.website?.length>0">
-                  <a class="btn-social btn-outline" href="{{user.website}}"><i class="fa fa-fw fa-desktop"></i></a>
-                </li>
-                <li *ngIf="user.twitter?.length>0">
-                  <a class="btn-social btn-outline" href="http://www.twitter.com/{{user.twitter}}"><i class="fa fa-fw fa-twitter"></i></a>
-                </li>
-                <li *ngIf="user.github?.length>0">
-                  <a class="btn-social btn-outline" href="http://www.github.com/{{user.github}}"><i class="fa fa-fw fa-github"></i></a>
-                </li>
-              </ul>
-            </div>
+        </div>
+         <div class="row">
+            <div *ngFor="let user of users">
+                <div *ngFor="let data of generateArray(user.User)">
+                    <p>{{data.fname}} {{data.lname}}</p>
+                </div>
+                <div *ngFor="let data of generateArray(user.Checkins)">
+                    <li>{{data.date}}</li>
+                    <li>{{data.activities}}</li>
+                    <li>{{data.feedback}}</li>
+                </div>
+          <hr/>
           </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
