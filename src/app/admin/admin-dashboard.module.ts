@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AdminAuthGuard } from './admin-auth-guard.service';
+//import { AdminService } from './admin.service';
 import { HttpModule } from '@angular/http';
 import { admindashRouting } from './admin-dashboard.routing';
 import { AdminDashboardComponent } from './admin-dashboard.component';
-import { AdminHomeComponent, AdminMembersComponent, AdminCheckinsComponent } from './admin-child.component';
+import { AdminMembersComponent, AdminActivitiesComponent, AdminNewComponent, AdminCheckinsComponent, AdminRequestsComponent } from './admin-child.component';
 
 @NgModule({
   imports:      [ 
@@ -18,9 +19,11 @@ import { AdminHomeComponent, AdminMembersComponent, AdminCheckinsComponent } fro
    providers: [AdminAuthGuard],
   declarations: [ 
     AdminDashboardComponent,
-    AdminHomeComponent,
     AdminMembersComponent,
-    AdminCheckinsComponent
+    AdminNewComponent,
+    AdminCheckinsComponent,
+    AdminRequestsComponent,
+    AdminActivitiesComponent
   ]
 })
 export class AdminDashModule { }

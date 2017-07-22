@@ -23,7 +23,7 @@
         "assets/css/main.css",
         "assets/css/font-awesome/css/font-awesome.min.css"
       ],
-      "scripts": [],
+      "scripts": ["../node_modules/file-saver/FileSaver.js"],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

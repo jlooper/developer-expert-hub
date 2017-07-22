@@ -4,13 +4,15 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Users } from '../models/users';
+import * as saveAs from 'file-saver';
 
+//newly registered users to be approved
 @Component({
-  selector: 'admin-home',
-  templateUrl: 'admin-home.component.html'
+  selector: 'admin-new',
+  templateUrl: 'admin-new.component.html'
 })
 
-export class AdminHomeComponent implements OnInit {
+export class AdminNewComponent implements OnInit {
  
   private profiles: FirebaseListObservable<any[]>;
   members: Array<Users> = [];
@@ -141,7 +143,7 @@ export class AdminCheckinsComponent implements OnInit {
   private profiles: FirebaseListObservable<any[]>;
   users: Array<any[]>;
 
-  constructor(private db: AngularFireDatabase) {}
+  constructor(private db: AngularFireDatabase/*, private saveAs: saveAs*/) {}
 
   ngOnInit(){
     //show only profiles with checkins
@@ -155,6 +157,102 @@ export class AdminCheckinsComponent implements OnInit {
       }
     });
   }
+  
+  /*saveFile() {
+    let file = new Blob(['hello world'], { type: 'text/csv;charset=utf-8' });
+    this.saveAs(file, 'helloworld.csv')
+  }*/
+
+  generateArray(obj){
+   return Object.keys(obj).map((key)=>{ return obj[key]});
+  }
+  
+}
+
+/*requests*/
+
+@Component({
+  selector: 'admin-requests',
+  templateUrl: 'admin-requests.component.html'
+})
+
+export class AdminRequestsComponent implements OnInit { 
+    
+  private profiles: FirebaseListObservable<any[]>;
+  users: Array<any[]>;
+  id: any;
+  success: string;
+  error: string;
+
+  constructor(private db: AngularFireDatabase) {}
+
+  ngOnInit(){
+    //show only profiles with requests
+    this.profiles = this.db.list('/Profile/');
+    this.profiles.subscribe(queriedItems => {
+      this.users = [];
+      for (let prop in queriedItems){
+        if (queriedItems[prop].Requests){
+          this.users.push(queriedItems[prop])
+        }
+      }
+    });
+  }
+
+  logged(id){
+    console.log(id)
+    //after emailing is done
+    /*const data = this.db.list('/Profile/'+this.id+'/Requests/'+id)
+      data.push({ logged: true, loggedDate:firebase.database.ServerValue.TIMESTAMP })
+    .then(
+        (success) => {
+        this.success = "Request logged!";
+      }).catch(
+        (err) => {
+        this.error = err.message;
+      })*/
+  }
+  
+
+  completed(){
+    //after request is delivered
+
+  }
+
+
+  generateArray(obj){
+   return Object.keys(obj).map((key)=>{ return obj[key]});
+  }
+  
+}
+
+// activities
+
+@Component({
+  selector: 'admin-activities',
+  templateUrl: 'admin-activities.component.html'
+})
+
+export class AdminActivitiesComponent implements OnInit { 
+    
+  private profiles: FirebaseListObservable<any[]>;
+  users: Array<any[]>;
+
+  constructor(private db: AngularFireDatabase) {}
+
+  ngOnInit(){
+    //show only profiles with requests
+    this.profiles = this.db.list('/Profile/');
+    this.profiles.subscribe(queriedItems => {
+      this.users = [];
+      for (let prop in queriedItems){
+        if (queriedItems[prop].Activities){
+          this.users.push(queriedItems[prop])
+        }
+      }
+    });
+  }
+
   generateArray(obj){
    return Object.keys(obj).map((key)=>{ return obj[key]});
   }

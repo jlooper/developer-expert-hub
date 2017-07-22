@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>All Checkins</h2>
+                <h2>All Activities</h2>
             </div>
         </div>
          <div class="row">
@@ -19,15 +19,13 @@
                 <div *ngFor="let data of generateArray(user.User)">
                     <p>{{data.fname}} {{data.lname}}</p>
                 </div>
-                <div *ngFor="let data of generateArray(user.Checkins)">
+                <div *ngFor="let data of generateArray(user.Activities)">
                     <li>{{data.date | date : 'MM/dd/yyyy'}}</li>
-                    <li>{{data.activities}}</li>
-                    <li>{{data.feedback}}</li>
+                    <li>{{data.activity}}</li>
                 </div>
           <hr/>
           </div>
           
-          <!--<button class="btn btn-success btn-primary btn-lg float-right" ng-click="saveFile()">Save</button>-->
 
         </div>
     </div>

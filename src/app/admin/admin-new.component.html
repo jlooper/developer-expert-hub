@@ -1,15 +1,17 @@
 <section id="page">
   <div class="container">
-    
+
     <div class="row">
         <ul class="nav nav-pills text-center">
-          <li role="presentation"><a routerLink="/admin/members">All Members</a></li>
-          <li role="presentation"><a routerLink="/admin/checkins">Checkins</a></li>
-          <li role="presentation"><a routerLink="/admin/requests">Requests</a></li>
-          <li role="presentation"><a routerLink="/admin/activities">Activities</a></li>
+            <li role="presentation"><a routerLink="/admin/members">All Members</a></li>
+            <li role="presentation"><a routerLink="/admin/new">New Enrollments</a></li>
+            <li role="presentation"><a routerLink="/admin/checkins">Checkins</a></li>
+            <li role="presentation"><a routerLink="/admin/requests">Requests</a></li>
+            <li role="presentation"><a routerLink="/admin/activities">Activities</a></li>
         </ul>
     </div>
 
+    
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2>Admin</h2>
@@ -19,8 +21,6 @@
     <ng-template #elseBlock>
       <div class="text-center">There are no new members for approval at this time</div>
     </ng-template>
-
-
 
     <div *ngIf="members?.length > 0; else elseBlock" class="row">
 

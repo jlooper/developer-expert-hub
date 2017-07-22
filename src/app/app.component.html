@@ -25,7 +25,7 @@
         </span>
         <!--if logged in and admin-->
         <span *ngIf="(user | async) && admin">
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">                
                 <li class="navbar-item button"><a routerLink="/admin/">Admin Home</a></li>
                 <li class="navbar-item button"><a routerLink="/dashboard/">Member Home</a></li>
                 <li class="navbar-item button"><a routerLink="/dashboard/account">My Account</a></li>
