@@ -20,7 +20,7 @@
                     <p>{{data.fname}} {{data.lname}}</p>
                 </div>
                 <div *ngFor="let data of generateArray(user.Checkins)">
-                    <li>{{data.date | date : 'MM/dd/yyyy'}}</li>
+                    <li>{{data.date}}</li>
                     <li>{{data.activities}}</li>
                     <li>{{data.feedback}}</li>
                 </div>
