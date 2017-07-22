@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Users } from '../models/users';
-import * as saveAs from 'file-saver';
+//import * as saveAs from 'file-saver';
 
 //newly registered users to be approved
 @Component({
