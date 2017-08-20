@@ -15,19 +15,29 @@
             </div>
         </div>
          <div class="row">
-            <div *ngFor="let user of users">
+
+            <div *ngIf="success" class="alert alert-success text-center">{{success}}</div>
+            <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
+
+            <div *ngFor="let user of users">                
+                
                 <div *ngFor="let data of generateArray(user.User)">
-                    <p>{{data.fname}} {{data.lname}}</p>
+                    <p>{{data.fname}} {{data.lname}} </p>
                 </div>
+
                 <div *ngFor="let data of generateArray(user.Requests)">
                     <li>{{data.date | date : 'MM/dd/yyyy'}}</li>
                     <li>{{data.request}}</li>
                     <li>{{data.requesttype}}</li>
+                    <li>logged: {{data.logged}}</li>
+                    <li>completed: {{data.completed}}</li>
+       
+                 </div>
+
+                <div *ngFor="let data of generateKey(user.Requests)">
+                    <button class="btn btn-success btn-med" (click)="logged(user.$key,data)">Logged</button>
+                    <button class="btn btn-success btn-med" (click)="completed(user.$key,data)">Completed</button>
                 </div>
-                <button class="btn btn-success btn-med" (click)="logged(data)">Logged</button>
-                <button class="btn btn-success btn-med" (click)="completed()">Completed</button>
-
-
               
           <hr/>
           </div>

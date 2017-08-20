@@ -16,9 +16,11 @@
         </div>
          <div class="row">
             <div *ngFor="let user of users">
+
                 <div *ngFor="let data of generateArray(user.User)">
                     <p>{{data.fname}} {{data.lname}}</p>
                 </div>
+                
                 <div *ngFor="let data of generateArray(user.Checkins)">
                     <li>{{data.date}}</li>
                     <li>{{data.activities}}</li>

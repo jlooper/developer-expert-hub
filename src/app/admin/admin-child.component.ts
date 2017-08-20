@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Users } from '../models/users';
 //import * as saveAs from 'file-saver';
@@ -179,49 +179,60 @@ export class AdminCheckinsComponent implements OnInit {
 export class AdminRequestsComponent implements OnInit { 
     
   private profiles: FirebaseListObservable<any[]>;
+  private requests: FirebaseListObservable<any[]>;
+  
   users: Array<any[]>;
   id: any;
+  key: any;
   success: string;
   error: string;
 
   constructor(private db: AngularFireDatabase) {}
 
   ngOnInit(){
-    //show only profiles with requests
+    //show only profiles with requests that are not completed
     this.profiles = this.db.list('/Profile/');
     this.profiles.subscribe(queriedItems => {
       this.users = [];
       for (let prop in queriedItems){
         if (queriedItems[prop].Requests){
-          this.users.push(queriedItems[prop])
+            this.users.push(queriedItems[prop])
         }
       }
     });
   }
 
-  logged(id){
-    console.log(id)
-    //after emailing is done
-    /*const data = this.db.list('/Profile/'+this.id+'/Requests/'+id)
-      data.push({ logged: true, loggedDate:firebase.database.ServerValue.TIMESTAMP })
+  logged(id,key){
+    const data = this.db.list('/Profile/'+id+'/Requests/');
+     data.update(key, { logged: true })
     .then(
         (success) => {
         this.success = "Request logged!";
       }).catch(
         (err) => {
         this.error = err.message;
-      })*/
+      })
   }
-  
 
-  completed(){
-    //after request is delivered
-
+  completed(id,key){
+    const data = this.db.list('/Profile/'+id+'/Requests/');
+     data.update(key, { completed: true })
+    .then(
+        (success) => {
+        this.success = "Request completed!";
+      }).catch(
+        (err) => {
+        this.error = err.message;
+      })
   }
 
 
   generateArray(obj){
    return Object.keys(obj).map((key)=>{ return obj[key]});
+  }
+
+  generateKey(obj){
+   return Object.keys(obj).map((key)=>{ return key});
   }
   
 }
