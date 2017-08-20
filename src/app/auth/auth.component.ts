@@ -160,14 +160,27 @@ export class LoginComponent {
 })
 
 export class ResetpassComponent {
+  public error: any;
   email: string;
+  message: string;
 
   constructor(private afAuth: AngularFireAuth) { }
 
   onSubmit(formData) {
-     if(formData.valid) {
-       console.log('Submission worked');
-     }
+    if(formData.valid) {
+      this.afAuth.auth.sendPasswordResetEmail(
+        formData.value.email
+      ).then(
+        (success) => {
+          this.message = 'An email with instructions has been sent'
+        }).catch(
+        (err) => {
+          this.error = err.message;
+        })
+    }
+    else {
+      this.error = 'Your form is invalid';
+    }
   }
 }
 
