@@ -258,7 +258,7 @@ function sendThanksEmail(email) {
 
 //notify admin of new info
 
-exports.sendMail = functions.database.ref('/Profile/{uid}')
+/*exports.sendMail = functions.database.ref('/Profile/{uid}')
   .onWrite(event => {
       const data = event.data.val();
       return sendEmail(data);
@@ -271,6 +271,66 @@ function sendEmail(data) {
   };
   mailOptions.subject = `New Dev Expert Info!`;
   mailOptions.text = `New info was just posted to the Dev Experts Hub `+JSON.stringify(data);
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('Alert email sent');
+  });
+}*/
+
+//notify admin of checkin
+
+exports.sendCheckinMail = functions.database.ref('/Profile/{uid}/Checkins')
+  .onCreate(event => {
+      const data = event.data.val();
+      return sendCheckinEmail(data);
+});
+
+function sendCheckinEmail(data) {
+  const mailOptions = {
+    from: '"Dev Expert Hub" <noreply@developer-experts-hub.firebaseapp.com>',
+    to: 'jen.looper@progress.com'
+  };
+  mailOptions.subject = `New Dev Expert Checkin Info!`;
+  mailOptions.text = `A new checkin was just posted to the Dev Experts Hub `+JSON.stringify(data);
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('Alert email sent');
+  });
+}
+
+//notify admin of activity
+
+exports.sendActivityMail = functions.database.ref('/Profile/{uid}/Activities')
+  .onCreate(event => {
+      const data = event.data.val();
+      return sendActivitiesEmail(data);
+});
+
+function sendActivitiesEmail(data) {
+  const mailOptions = {
+    from: '"Dev Expert Hub" <noreply@developer-experts-hub.firebaseapp.com>',
+    to: 'jen.looper@progress.com'
+  };
+  mailOptions.subject = `New Dev Expert Activity Info!`;
+  mailOptions.text = `A new activity was just posted to the Dev Experts Hub `+JSON.stringify(data);
+  return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('Alert email sent');
+  });
+}
+
+//notify admin of new user
+
+exports.sendUserMail = functions.database.ref('/Profile')
+  .onCreate(event => {
+      const data = event.data.val();
+      return sendUserEmail(data);
+});
+
+function sendUserEmail(data) {
+  const mailOptions = {
+    from: '"Dev Expert Hub" <noreply@developer-experts-hub.firebaseapp.com>',
+    to: 'jen.looper@progress.com'
+  };
+  mailOptions.subject = `New Dev Expert Activity Info!`;
+  mailOptions.text = `A new user was just created in the Dev Experts Hub `+JSON.stringify(data);
   return mailTransport.sendMail(mailOptions).then(() => {
     console.log('Alert email sent');
   });
