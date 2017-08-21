@@ -319,7 +319,7 @@ function sendActivitiesEmail(data) {
 //notify admin of new user
 
 exports.sendUserMail = functions.database.ref('/Profile')
-  .onWrite(event => {
+  .onCreate(event => {
       const data = event.data.val();
       return sendUserEmail(data);
 });
@@ -332,6 +332,26 @@ function sendUserEmail(data) {
   mailOptions.subject = `New Dev Expert Activity Info!`;
   mailOptions.text = `A new user was just created in the Dev Experts Hub `+JSON.stringify(data);
   return mailTransport.sendMail(mailOptions).then(() => {
+    console.log('Alert email sent');
+  });
+}
+
+//notify admin of new request
+
+exports.sendRequestMail = functions.database.ref('/Profile/{uid}/Requests')
+  .onWrite(event => {
+      const data = event.data.val();
+      return sendRequestEmail(data);
+});
+
+function sendRequestEmail(data) {
+  const mailOptions = {
+    from: '"Dev Expert Hub" <noreply@developer-experts-hub.firebaseapp.com>',
+    to: 'jen.looper@progress.com'
+  };
+  mailOptions.subject = `New Dev Expert Request Info!`;
+  mailOptions.text = `A new request was just created in the Dev Experts Hub `+JSON.stringify(data);
+  return mailTransport.sendRequestMail(mailOptions).then(() => {
     console.log('Alert email sent');
   });
 }
