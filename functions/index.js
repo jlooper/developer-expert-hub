@@ -279,7 +279,7 @@ function sendEmail(data) {
 //notify admin of checkin
 
 exports.sendCheckinMail = functions.database.ref('/Profile/{uid}/Checkins')
-  .onCreate(event => {
+  .onWrite(event => {
       const data = event.data.val();
       return sendCheckinEmail(data);
 });
@@ -299,7 +299,7 @@ function sendCheckinEmail(data) {
 //notify admin of activity
 
 exports.sendActivityMail = functions.database.ref('/Profile/{uid}/Activities')
-  .onCreate(event => {
+  .onWrite(event => {
       const data = event.data.val();
       return sendActivitiesEmail(data);
 });
@@ -319,7 +319,7 @@ function sendActivitiesEmail(data) {
 //notify admin of new user
 
 exports.sendUserMail = functions.database.ref('/Profile')
-  .onCreate(event => {
+  .onWrite(event => {
       const data = event.data.val();
       return sendUserEmail(data);
 });
