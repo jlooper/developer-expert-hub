@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <h3 class="required" for="activities">Activities</h3>
                                 <p>Please list your most significant activities between January and July of this year, such as conference talks, blogposts, or activity on social media for Telerik/Progress products. Your most recent activities can be found <a routerLink="/dashboard/account">here</a>.</p>
-                                <textarea rows="10" class="form-control" (ngModel)="activities" placeholder="My most recent activities" id="activities" name="activities" #activities="ngModel" required></textarea>
+                                <textarea rows="10" class="form-control" [(ngModel)]="activities" placeholder="My most recent activities" id="activities" name="activities" required ></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <h3 class="required" for="feedback">Feedback</h3>
                                 <p>Please let me know what you think of the program. What suggestions can you make to improve it? How can I help you?</p>
-                                <textarea rows="3" class="form-control" (ngModel)="feedback" placeholder="My feedback" id="feedback" name="feedback" #feedback="ngModel" required></textarea>
+                                <textarea rows="3" class="form-control" [(ngModel)]="feedback" placeholder="My feedback" id="feedback" name="feedback" required></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

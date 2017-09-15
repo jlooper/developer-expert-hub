@@ -132,6 +132,7 @@ onSubmit(formData){
     .then(
         (success) => {
         this.success = "Activity logged!";
+        this.activity = '';
       }).catch(
         (err) => {
         this.error = err.message;
@@ -181,6 +182,8 @@ onSubmit(formData){
     .then(
         (success) => {
         this.success = "Request logged!";
+        // empty the value so do not let several shipments of the same
+        this.request = '';
       }).catch(
         (err) => {
         this.error = err.message;
@@ -201,6 +204,8 @@ export class CheckinsComponent {
   success: string;
   error: string;
   continue: string;
+  activities: string;
+  feedback: string;
 
 constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
       this.user = afAuth.authState;
@@ -223,7 +228,9 @@ onSubmit(formData){
       data.push({ activities: formData.value.activities, date: '7/2017', continue: formData.value.continue, feedback: formData.value.feedback })
     .then(
         (success) => {
-        this.success = "Checkin logged! Thank you!";
+          this.success = "Checkin logged! Thank you!";
+          this.activities = '';
+          this.feedback = '';
       }).catch(
         (err) => {
         this.error = err.message;
