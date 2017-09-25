@@ -1,0 +1,46 @@
+<section id="page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Login</h2>
+                </div>
+            </div>
+            <div class="form row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div *ngIf="message" class="alert alert-success text-center">{{message}}</div>
+                    <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
+                    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+                        <div class="row control-group">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" (ngModel)="email" placeholder="Email" id="email" name="email" required data-validation-required-message="Email is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" (ngModel)="password" placeholder="Password" id="password" name="password" required data-validation-required-message="Password is required.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="col-lg-6 col-lg-offset-3">
+                                <button type="submit" [disabled]="!formData.valid" class="btn btn-success btn-primary btn-lg float-right">Submit</button>
+                            </div>                           
+                        </div>
+                        <div class="row">
+                            <div class="col-med-6 col-lg-6 link text-center">
+                                <a routerLink="/signup">Don't have an account?</a>
+                            </div>
+                            <div class="col-med-6 col-lg-6 link text-center">
+                                <a routerLink="/password-reset">Forgotten password?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>

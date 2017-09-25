@@ -1,0 +1,48 @@
+<section id="page">
+    <div class="container">
+        <div class="row">
+            <ul class="nav nav-pills text-center">
+                <li role="presentation"><a routerLink="/admin/members">All Members</a></li>
+                <li role="presentation"><a routerLink="/admin/new">New Enrollments</a></li>
+                <li role="presentation"><a routerLink="/admin/checkins">Checkins</a></li>
+                <li role="presentation"><a routerLink="/admin/requests">Requests</a></li>
+                <li role="presentation"><a routerLink="/admin/activities">Activities</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>All Requests</h2>
+            </div>
+        </div>
+         <div class="row">
+
+            <div *ngIf="success" class="alert alert-success text-center">{{success}}</div>
+            <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
+
+            <div *ngFor="let user of users">                
+                
+                <div *ngFor="let data of generateArray(user.User)">
+                    <p>{{data.fname}} {{data.lname}} </p>
+                </div>
+
+                <div *ngFor="let data of generateArray(user.Requests)">
+                    <li>{{data.date | date : 'MM/dd/yyyy'}}</li>
+                    <li>{{data.request}}</li>
+                    <li>{{data.requesttype}}</li>
+                    <li>logged: {{data.logged}}</li>
+                    <li>completed: {{data.completed}}</li>
+       
+                 </div>
+
+                <div *ngFor="let data of generateKey(user.Requests)">
+                    <button class="btn btn-success btn-med" (click)="logged(user.$key,data)">Logged</button>
+                    <button class="btn btn-success btn-med" (click)="completed(user.$key,data)">Completed</button>
+                </div>
+              
+          <hr/>
+          </div>
+          
+
+        </div>
+    </div>
+</section>

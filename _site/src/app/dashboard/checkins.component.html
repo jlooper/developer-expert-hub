@@ -1,0 +1,56 @@
+<section id="page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Checkin</h2>
+                </div>
+            </div>
+        
+            <div class="form row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div *ngIf="success" class="alert alert-success text-center">{{success}}</div>
+                    <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
+                    
+                    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+                        <div class="row control-group">
+                            <div class="form-group">
+                                <h3 class="required" for="activities">Activities</h3>
+                                <p>Please list your most significant activities between January and July of this year, such as conference talks, blogposts, or activity on social media for Telerik/Progress products. Your most recent activities can be found <a routerLink="/dashboard/account">here</a>.</p>
+                                <textarea rows="10" class="form-control" [(ngModel)]="activities" placeholder="My most recent activities" id="activities" name="activities" required ></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group">
+                                <h3 class="required" for="feedback">Feedback</h3>
+                                <p>Please let me know what you think of the program. What suggestions can you make to improve it? How can I help you?</p>
+                                <textarea rows="3" class="form-control" [(ngModel)]="feedback" placeholder="My feedback" id="feedback" name="feedback" required></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <h5 class="required">I'd like to remain in this program for the rest of the year</h5>
+                            <div class="radio">
+                                <label class="h4">
+                                    <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="continue" name="continue" type="radio" value="Yes"  [(ngModel)]="continue" >Yes!
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="h4">
+                                    <input (change)="handleChange($event.target.checked,$event.target.getAttribute('value'))" id="continue" name="continue" type="radio" value="No" [(ngModel)]="continue" >No
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="col-lg-6 col-lg-offset-3">
+                                <button type="submit" [disabled]="!formData.valid" class="btn btn-success btn-primary btn-lg float-right">Submit</button>
+                            </div>                           
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>            
+    </section>
