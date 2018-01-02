@@ -1,0 +1,36 @@
+<section id="page">
+    <div class="container">
+        <div class="row">
+            <ul class="nav nav-pills text-center">
+                <li role="presentation"><a routerLink="/admin/members">All Members</a></li>
+                <li role="presentation"><a routerLink="/admin/new">New Enrollments</a></li>
+                <li role="presentation"><a routerLink="/admin/checkins">Checkins</a></li>
+                <li role="presentation"><a routerLink="/admin/requests">Requests</a></li>
+                <li role="presentation"><a routerLink="/admin/activities">Activities</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>All Checkins</h2>
+            </div>
+        </div>
+         <div class="row">
+            <div *ngFor="let user of users">
+
+                <div *ngFor="let data of generateArray(user.User)">
+                    <p>{{data.fname}} {{data.lname}}</p>
+                </div>
+                
+                <div *ngFor="let data of generateArray(user.Checkins)">
+                    <li>{{data.date}}</li>
+                    <li>{{data.activities}}</li>
+                    <li>{{data.feedback}}</li>
+                </div>
+          <hr/>
+          </div>
+          
+          <!--<button class="btn btn-success btn-primary btn-lg float-right" ng-click="saveFile()">Save</button>-->
+
+        </div>
+    </div>
+</section>
