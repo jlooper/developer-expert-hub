@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,14 +9,14 @@ import { DashboardComponent } from './dashboard.component';
 import { HomeComponent, AccountComponent, ActivitiesComponent, RequestComponent, CheckinsComponent } from './child.component';
 
 @NgModule({
-  imports:      [ 
+  imports: [
     dashRouting,
     FormsModule,
     CommonModule,
     HttpModule
-   ],
-   providers: [AuthGuard],
-  declarations: [ 
+  ],
+  providers: [AuthGuard],
+  declarations: [
     DashboardComponent,
     AccountComponent,
     HomeComponent,
