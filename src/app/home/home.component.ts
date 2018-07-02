@@ -1,8 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import {DomSanitizer} from '@angular/platform-browser';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Users } from '../models/users';
 
 @Component({
@@ -11,23 +11,29 @@ import { Users } from '../models/users';
 })
 
 export class HomeComponent implements OnInit {
- 
-  private profiles: FirebaseListObservable<any[]>;
+
+  private profiles: AngularFireList<any[]>;
   members: Array<Users> = [];
 
   cleanedImage: any;
-  private sub:any;
+  private sub: any;
 
-  constructor(private db: AngularFireDatabase, private sanitizer: DomSanitizer, private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private db: AngularFireDatabase,
+    private sanitizer: DomSanitizer,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) { }
 
-  ngOnInit(){
-      //show only profiles with activities
-      this.profiles = this.db.list('/Profile');
-      this.profiles.subscribe(queriedItems => {
-        this.members = [];
-        for (let prop in queriedItems){
-          let member = this.generateArray(queriedItems[prop].User);
-          if (member[0].member && !member[0].admin){
+  ngOnInit() {
+    // show only profiles with activities
+    this.profiles = this.db.list('/Profile');
+    this.profiles.valueChanges().subscribe(queriedItems => {
+      this.members = [];
+
+      Object.keys(queriedItems).map(
+        (prop) => {
+          const member = this.generateArray(queriedItems[prop].User);
+          if (member[0].member && !member[0].admin) {
             this.cleanedImage = this.sanitizer.bypassSecurityTrustUrl(member[0].image);
             queriedItems[prop].image = this.cleanedImage.changingThisBreaksApplicationSecurity;
             queriedItems[prop].fname = member[0].fname;
@@ -44,23 +50,25 @@ export class HomeComponent implements OnInit {
             this.members.push(queriedItems[prop])
           }
         }
-        this.members.sort(this.alphabetize('lname'));
-      });
-    }
-
-    alphabetize(key) {
-      return function(a,b){
-      if (a[key] > b[key]) return 1;
-      if (a[key] < b[key]) return -1;
-      return 0;
-      }
-    }
-
-    generateArray(obj){
-      //sort
-      return Object.keys(obj).map(
-        (key) => { return obj[key] }
       );
+
+      this.members.sort(this.alphabetize('lname'));
+    });
+  }
+
+  alphabetize(key) {
+    return function (a, b) {
+      if (a[key] > b[key]) { return 1 };
+      if (a[key] < b[key]) { return -1 };
+      return 0;
     }
+  }
+
+  generateArray(obj) {
+    // sort
+    return Object.keys(obj).map(
+      (key) => { return obj[key] }
+    );
+  }
 
 }
