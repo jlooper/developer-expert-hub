@@ -53,10 +53,10 @@ export class AccountComponent {
   // requests: FirebaseListObservable<any[]>;
   // checkins: FirebaseListObservable<any[]>;
 
-  currUser: AngularFireList<any>;
-  activities: AngularFireList<any[]>;
-  requests: AngularFireList<any[]>;
-  checkins: AngularFireList<any[]>;
+  currUser: AngularFireList<Observable<any>>;
+  activities: AngularFireList<Observable<any[]>>;
+  requests: AngularFireList<Observable<any[]>>;
+  checkins: AngularFireList<Observable<any[]>>;
 
   edit = {
       name: false,
@@ -71,55 +71,55 @@ export class AccountComponent {
       state: false,
       postalcode: false,
       country: false,
-      phone: false
+      phone: false,
+      save: false
   };
 
-  expert: {
-      name: string;
-      company: string;
-      title: string;
-      bio: string;
-      expertise: string;
-      email: string;
-      address1: string;
-      address2: string;
-      city: string;
-      state: string;
-      postalcode: string;
-      country: string;
-      phone: string;
-      id: any;
-  };
+  name: string;
+  company: string;
+  title: string;
+  bio: string;
+  expertise: string;
+  email: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  postalcode: string;
+  country: string;
+  phone: string;
+  id: any;
 
   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
+
     this.user.subscribe((user: firebase.User) => {
       if (user != null) {
-        this.expert.id = user.uid;
-        this.expert.email = user.email;
-        this.currUser = this.db.list('/Profile/' + this.expert.id + '/User');
+        this.id = user.uid;
+        this.email = user.email;
+        this.activities = this.db.list('/Profile/' + this.id + '/Activities');
+        this.requests = this.db.list('/Profile/' + this.id + '/Requests');
+        this.checkins = this.db.list('/Profile/' + this.id + '/Checkins');
+        this.currUser = this.db.list('/Profile/' + this.id + '/User');
         this.currUser.valueChanges().subscribe(queriedItems => {
 
           Object.keys(queriedItems).map(
             (prop) => {
-              this.expert.name = queriedItems[prop].fname + ' ' + queriedItems[prop].lname;
-              this.expert.company = queriedItems[prop].company;
-              this.expert.title = queriedItems[prop].title;
-              this.expert.address1 = queriedItems[prop].address1;
-              this.expert.address2 = queriedItems[prop].address2;
-              this.expert.city = queriedItems[prop].city;
-              this.expert.state = queriedItems[prop].state;
-              this.expert.country = queriedItems[prop].country;
-              this.expert.postalcode = queriedItems[prop].postalcode;
-              this.expert.phone = queriedItems[prop].phone;
-              this.expert.bio = queriedItems[prop].bio;
-              this.expert.expertise = queriedItems[prop].expertise;
+              this.name = queriedItems[prop].fname + ' ' + queriedItems[prop].lname;
+              this.company = queriedItems[prop].company;
+              this.title = queriedItems[prop].title;
+              this.address1 = queriedItems[prop].address1;
+              this.address2 = queriedItems[prop].address2;
+              this.city = queriedItems[prop].city;
+              this.state = queriedItems[prop].state;
+              this.country = queriedItems[prop].country;
+              this.postalcode = queriedItems[prop].postalcode;
+              this.phone = queriedItems[prop].phone;
+              this.bio = queriedItems[prop].bio;
+              this.expertise = queriedItems[prop].expertise;
             }
           );
         });
-        this.activities = this.db.list('/Profile/' + this.expert.id + '/Activities');
-        this.requests = this.db.list('/Profile/' + this.expert.id + '/Requests');
-        this.checkins = this.db.list('/Profile/' + this.expert.id + '/Checkins');
       }
     });
   }

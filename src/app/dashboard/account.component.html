@@ -16,39 +16,40 @@
                                 <p>
                                     <span class="fa fa-user pad-right"></span>
                                     <span *ngIf="!edit.name">
-                                        {{ expert.name }} <span class="fa fa-pencil pad-right"></span>
+                                        {{ name }} <span class="fa fa-pencil pad-right" (click)="edit.name=!edit.name"></span>
                                     </span>
-                                    <input *ngIf="edit.name" type="text" [(ngModel)]="expert.name" />
+                                    <input *ngIf="edit.name" type="text" [(ngModel)]="name" (change)="edit.save = true" />
                                 </p>
-                                <p><span class="fa fa-envelope pad-right"></span>{{ expert.email }} <span class="fa fa-pencil pad-right"></span></p>
-                                <p><span class="fa fa-building pad-right"></span>{{ expert.title }} at {{ expert.company }} <span class="fa fa-pencil pad-right"></span></p>
+                                <p><span class="fa fa-envelope pad-right"></span>{{ email }} <span class="fa fa-pencil pad-right"></span></p>
+                                <p><span class="fa fa-building pad-right"></span>{{ title }} at {{ company }} <span class="fa fa-pencil pad-right"></span></p>
                                 <p><span class="fa fa-home pad-right"></span>Home Address <span class="fa fa-pencil pad-right"></span></p>
                                 <blockquote>
-                                    {{ expert.address1 }} {{ expert.address2 }}<br/>
-                                    {{ expert.city }}<br/>
-                                    {{ expert.state }}<br/>
-                                    {{ expert.postalcode }}<br/>
-                                    {{ expert.country }}<br/>
-                                    {{ expert.phone }}
+                                    {{ address1 }} {{ address2 }}<br/>
+                                    {{ city }}<br/>
+                                    {{ state }}<br/>
+                                    {{ postalcode }}<br/>
+                                    {{ country }}<br/>
+                                    {{ phone }}
                                 </blockquote>
-                                
+
 
                             </div>
                             <p><span class="fa fa-gear pad-right"></span>Expertise</p>
-                            <ul *ngFor="let item of expert.expertise">
+                            <ul *ngFor="let item of expertise">
                                 <li>{{item}}</li>
                             </ul>
                         </div>
                         <div class="row">
                             <blockquote>
-                                <p>{{ expert.bio }}</p>
+                                <p>{{ bio }}</p>
                             </blockquote>
                         </div>
                     </div>
+                    <button class="btn btn-success btn-primary btn-lg float-right" *ngIf="edit.save">Submit</button>
                 </div>
             </div>
         
-            <div *ngIf="(activities | async)?.length > 0" class="col-lg-6">
+            <!--div *ngIf="(activities | async)?.length > 0" class="col-lg-6">
                 <div class="panel panel-success">
                     <div class="panel-heading"><h3>My Activities</h3></div>
                     <div class="panel-body">
@@ -81,7 +82,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
     </div>
 </section>
