@@ -1,4 +1,4 @@
-import { ModuleWithProviders }  from '@angular/core';
+import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
@@ -6,7 +6,8 @@ import { HomeComponent, AccountComponent, ActivitiesComponent, RequestComponent,
 import { AuthGuard } from '../auth/auth-guard.service';
 
 const appRoutes: Routes = [
-  { path: 'dashboard',
+  {
+    path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
     children: [
@@ -14,7 +15,7 @@ const appRoutes: Routes = [
       { path: 'account', component: AccountComponent },
       { path: 'requests', component: RequestComponent },
       { path: 'activities', component: ActivitiesComponent },
-      { path: 'checkins', component: CheckinsComponent}
+      { path: 'checkins', component: CheckinsComponent }
     ]
   },
 ];
