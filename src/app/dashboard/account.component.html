@@ -13,29 +13,35 @@
                     <div class="panel-body">
                         <div class="row">
                             <div>
-                                <p><span class="fa fa-user pad-right"></span>{{ name }} <span class="fa fa-pencil pad-right"></span></p>
-                                <p><span class="fa fa-envelope pad-right"></span>{{ email }}</p>
-                                <p><span class="fa fa-building pad-right"></span>{{ title }} at {{ company }}</p>
-                                <p><span class="fa fa-home pad-right"></span>Home Address</p>
+                                <p>
+                                    <span class="fa fa-user pad-right"></span>
+                                    <span *ngIf="!edit.name">
+                                        {{ expert.name }} <span class="fa fa-pencil pad-right"></span>
+                                    </span>
+                                    <input *ngIf="edit.name" type="text" [(ngModel)]="expert.name" />
+                                </p>
+                                <p><span class="fa fa-envelope pad-right"></span>{{ expert.email }} <span class="fa fa-pencil pad-right"></span></p>
+                                <p><span class="fa fa-building pad-right"></span>{{ expert.title }} at {{ expert.company }} <span class="fa fa-pencil pad-right"></span></p>
+                                <p><span class="fa fa-home pad-right"></span>Home Address <span class="fa fa-pencil pad-right"></span></p>
                                 <blockquote>
-                                    {{ address1 }} {{ address2 }}<br/>
-                                    {{ city }}<br/>
-                                    {{ state }}<br/>
-                                    {{ postalcode }}<br/>
-                                    {{ country }}<br/>
-                                    {{ phone }}
+                                    {{ expert.address1 }} {{ expert.address2 }}<br/>
+                                    {{ expert.city }}<br/>
+                                    {{ expert.state }}<br/>
+                                    {{ expert.postalcode }}<br/>
+                                    {{ expert.country }}<br/>
+                                    {{ expert.phone }}
                                 </blockquote>
                                 
 
                             </div>
                             <p><span class="fa fa-gear pad-right"></span>Expertise</p>
-                            <ul *ngFor="let item of expertise">
+                            <ul *ngFor="let item of expert.expertise">
                                 <li>{{item}}</li>
                             </ul>
                         </div>
                         <div class="row">
                             <blockquote>
-                                <p>{{ bio }}</p>
+                                <p>{{ expert.bio }}</p>
                             </blockquote>
                         </div>
                     </div>
