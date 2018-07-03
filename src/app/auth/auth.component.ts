@@ -164,7 +164,16 @@ export class LoginComponent {
     public db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     private router: Router
-  ) { }
+  ) {
+      // check if have a cookie login
+      afAuth.authState.subscribe(
+      (user) => {
+          if (user !== null) {
+              const u = <any>user;
+              this.getUser(u.uid);
+          }
+      });
+  }
 
   public onSubmit(formData) {
     if (formData.valid) {
