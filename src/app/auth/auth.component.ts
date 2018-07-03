@@ -64,7 +64,6 @@ export class SignupComponent {
     const storageRef = firebase.storage().ref(storageUrl + name);
     storageRef.put(file).then(function (snapshot) {
       // get the download URL
-      console.log(snapshot.downloadURL);
       localStorage.setItem('currFile', snapshot.downloadURL);
     });
   }
@@ -135,7 +134,6 @@ export class SignupComponent {
     })
       .then(
         (success) => {
-          console.log(success);
           // clear localstorage
           localStorage.removeItem('currFile');
           this.router.navigate(['/success']);
@@ -196,7 +194,6 @@ export class LoginComponent {
     const queryObservable = this.db.list<firebase.auth.Auth>('/Profile/' + id + '/User');
     queryObservable.valueChanges().subscribe(queriedItems => {
       this.member = (<any>queriedItems[0]).member;
-      console.log(this.member);
       if (this.member) {
         this.router.navigate(['/dashboard']);
       } else {
