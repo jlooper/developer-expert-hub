@@ -13,10 +13,16 @@
                     <div class="panel-body">
                         <div class="row">
                             <div>
-                                <p><span class="fa fa-user pad-right"></span>{{ name }}</p>
-                                <p><span class="fa fa-envelope pad-right"></span>{{ email }}</p>
-                                <p><span class="fa fa-building pad-right"></span>{{ title }} at {{ company }}</p>
-                                <p><span class="fa fa-home pad-right"></span>Home Address</p>
+                                <p>
+                                    <span class="fa fa-user pad-right"></span>
+                                    <span *ngIf="!edit.name">
+                                        {{ name }} <span class="fa fa-pencil pad-right" (click)="edit.name=!edit.name"></span>
+                                    </span>
+                                    <input *ngIf="edit.name" type="text" [(ngModel)]="name" (change)="edit.save = true" />
+                                </p>
+                                <p><span class="fa fa-envelope pad-right"></span>{{ email }} <span class="fa fa-pencil pad-right"></span></p>
+                                <p><span class="fa fa-building pad-right"></span>{{ title }} at {{ company }} <span class="fa fa-pencil pad-right"></span></p>
+                                <p><span class="fa fa-home pad-right"></span>Home Address <span class="fa fa-pencil pad-right"></span></p>
                                 <blockquote>
                                     {{ address1 }} {{ address2 }}<br/>
                                     {{ city }}<br/>
@@ -25,7 +31,7 @@
                                     {{ country }}<br/>
                                     {{ phone }}
                                 </blockquote>
-                                
+
 
                             </div>
                             <p><span class="fa fa-gear pad-right"></span>Expertise</p>
@@ -39,10 +45,11 @@
                             </blockquote>
                         </div>
                     </div>
+                    <button class="btn btn-success btn-primary btn-lg float-right" *ngIf="edit.save">Submit</button>
                 </div>
             </div>
         
-            <div *ngIf="(activities | async)?.length > 0" class="col-lg-6">
+            <!--div *ngIf="(activities | async)?.length > 0" class="col-lg-6">
                 <div class="panel panel-success">
                     <div class="panel-heading"><h3>My Activities</h3></div>
                     <div class="panel-body">
@@ -75,7 +82,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div-->
         </div>
     </div>
 </section>
