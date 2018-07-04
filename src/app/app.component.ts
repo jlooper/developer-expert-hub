@@ -27,9 +27,13 @@ export class AppComponent implements OnInit {
         this.id = user.uid;
         const queryObservable = this.db.list('/Profile/' + this.id + '/User');
         queryObservable.valueChanges().subscribe(queriedItems => {
-          console.log(queriedItems[0])
-          this.member = (<any>queriedItems[0]).member;
-          this.admin = (<any>queriedItems[0]).admin;
+            // self-login ( i know is not the best :P i'm move latter to session :)
+            // TODO: @jorgeucano move to session
+            if (queriedItems.length > 0) {
+                this.member = (<any>queriedItems[0]).member;
+                this.admin = (<any>queriedItems[0]).admin;
+                this.router.navigate(['/dashboard']);
+            }
         });
       }
     });

@@ -53,10 +53,27 @@ export class AccountComponent {
   // requests: FirebaseListObservable<any[]>;
   // checkins: FirebaseListObservable<any[]>;
 
-  currUser: AngularFireList<any>;
-  activities: AngularFireList<any[]>;
-  requests: AngularFireList<any[]>;
-  checkins: AngularFireList<any[]>;
+  currUser: AngularFireList<Observable<any>>;
+  activities: AngularFireList<Observable<any[]>>;
+  requests: AngularFireList<Observable<any[]>>;
+  checkins: AngularFireList<Observable<any[]>>;
+
+  edit = {
+      name: false,
+      company: false,
+      title: false,
+      bio: false,
+      expertise: false,
+      email: false,
+      address1: false,
+      address2: false,
+      city: false,
+      state: false,
+      postalcode: false,
+      country: false,
+      phone: false,
+      save: false
+  };
 
   name: string;
   company: string;
@@ -75,10 +92,14 @@ export class AccountComponent {
 
   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
+
     this.user.subscribe((user: firebase.User) => {
       if (user != null) {
         this.id = user.uid;
         this.email = user.email;
+        this.activities = this.db.list('/Profile/' + this.id + '/Activities');
+        this.requests = this.db.list('/Profile/' + this.id + '/Requests');
+        this.checkins = this.db.list('/Profile/' + this.id + '/Checkins');
         this.currUser = this.db.list('/Profile/' + this.id + '/User');
         this.currUser.valueChanges().subscribe(queriedItems => {
 
@@ -99,11 +120,12 @@ export class AccountComponent {
             }
           );
         });
-        this.activities = this.db.list('/Profile/' + this.id + '/Activities');
-        this.requests = this.db.list('/Profile/' + this.id + '/Requests');
-        this.checkins = this.db.list('/Profile/' + this.id + '/Checkins');
       }
     });
+  }
+
+  updateProfile() {
+
   }
 
 }
