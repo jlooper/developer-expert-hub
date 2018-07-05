@@ -151,7 +151,7 @@ export class ActivitiesComponent {
       if (user != null) {
         this.id = user.uid;
         this.email = user.email;
-        this.activities = this.db.list('/Profile/' + this.id + '/Activities');
+        this.activities = this.db.list('/Profile/' + this.id + '/Activities')
 
       }
     })
@@ -259,10 +259,14 @@ export class CheckinsComponent {
 
   onSubmit(formData) {
     // push to the user's id within the Requests object
+    var date = new Date();
+    var datestring = date.getMonth()+1 + "/" + date.getFullYear();
+
+
     const data = this.db.list('/Profile/' + this.id + '/Checkins')
     data.push({
       activities: formData.value.activities,
-      date: '7/2017',
+      date: datestring,
       continue: formData.value.continue,
       feedback: formData.value.feedback
     })
