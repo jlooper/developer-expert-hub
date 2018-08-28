@@ -90,6 +90,10 @@ export class AccountComponent {
   phone: string;
   id: any;
 
+  fname: string;
+  lname: string;
+  key: string;
+
   constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.user = afAuth.authState;
 
@@ -101,22 +105,34 @@ export class AccountComponent {
         this.requests = this.db.list('/Profile/' + this.id + '/Requests');
         this.checkins = this.db.list('/Profile/' + this.id + '/Checkins');
         this.currUser = this.db.list('/Profile/' + this.id + '/User');
+        this.currUser.snapshotChanges().subscribe(
+            data => {
+                this.key = data[0].key;
+            }
+        )
         this.currUser.valueChanges().subscribe(queriedItems => {
-
+            let i = true;
+            console.log(queriedItems);
           Object.keys(queriedItems).map(
             (prop) => {
-              this.name = queriedItems[prop].fname + ' ' + queriedItems[prop].lname;
-              this.company = queriedItems[prop].company;
-              this.title = queriedItems[prop].title;
-              this.address1 = queriedItems[prop].address1;
-              this.address2 = queriedItems[prop].address2;
-              this.city = queriedItems[prop].city;
-              this.state = queriedItems[prop].state;
-              this.country = queriedItems[prop].country;
-              this.postalcode = queriedItems[prop].postalcode;
-              this.phone = queriedItems[prop].phone;
-              this.bio = queriedItems[prop].bio;
-              this.expertise = queriedItems[prop].expertise;
+                if (i) {
+                    i = false;
+                    console.log('props', queriedItems[prop]);
+                    this.fname = queriedItems[prop].fname;
+                    this.lname = queriedItems[prop].lname;
+                    this.name = queriedItems[prop].fname + ' ' + queriedItems[prop].lname;
+                    this.company = queriedItems[prop].company;
+                    this.title = queriedItems[prop].title;
+                    this.address1 = queriedItems[prop].address1;
+                    this.address2 = queriedItems[prop].address2;
+                    this.city = queriedItems[prop].city;
+                    this.state = queriedItems[prop].state;
+                    this.country = queriedItems[prop].country;
+                    this.postalcode = queriedItems[prop].postalcode;
+                    this.phone = queriedItems[prop].phone;
+                    this.bio = queriedItems[prop].bio;
+                    this.expertise = queriedItems[prop].expertise;
+                }
             }
           );
         });
@@ -125,7 +141,51 @@ export class AccountComponent {
   }
 
   updateProfile() {
-
+      const data = {
+          fname: this.fname,
+          lname: this.lname,
+          company: this.company,
+          title: this.title,
+          address1: this.address1,
+          address2: this.address2,
+          city: this.city,
+          state: this.state,
+          country: this.country,
+          postalcode: this.postalcode,
+          phone: this.phone,
+          bio: this.bio,
+          expertise: ['NativeScript']
+      };
+      console.log(data);
+      console.log('/Profile/' + this.id + '/User');
+      this.db.object('/Profile/' + this.id + '/User/' + this.key)
+          .update(data)
+          .then(
+              (response) => {
+                  console.log(response);
+                  this.edit = {
+                      name: false,
+                      company: false,
+                      title: false,
+                      bio: false,
+                      expertise: false,
+                      email: false,
+                      address1: false,
+                      address2: false,
+                      city: false,
+                      state: false,
+                      postalcode: false,
+                      country: false,
+                      phone: false,
+                      save: false
+                  };
+                  alert('Update success');
+              },
+              (error) => {
+                  console.log('error', error);
+                  alert('Update error');
+              }
+          );
   }
 
 }
