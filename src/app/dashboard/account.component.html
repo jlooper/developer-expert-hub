@@ -16,14 +16,30 @@
                                 <p>
                                     <span class="fa fa-user pad-right"></span>
                                     <span *ngIf="!edit.name">
-                                        {{ name }} <!--<span class="fa fa-pencil pad-right" (click)="edit.name=!edit.name"></span>-->
+                                        {{ name }} <span class="fa fa-pencil pad-right" (click)="edit.name=!edit.name; edit.save = true;"></span>
                                     </span>
-                                    <input *ngIf="edit.name" type="text" [(ngModel)]="name" (change)="edit.save = true" />
+                                    <input class="form-control"  *ngIf="edit.name" type="text" [(ngModel)]="fname" />
+                                    <input class="form-control"  *ngIf="edit.name" type="text" [(ngModel)]="lname" />
                                 </p>
-                                <p><span class="fa fa-envelope pad-right"></span>{{ email }} <!--<span class="fa fa-pencil pad-right"></span>--></p>
-                                <p><span class="fa fa-building pad-right"></span>{{ title }} at {{ company }} <!--<span class="fa fa-pencil pad-right"></span>--></p>
-                                <p><span class="fa fa-home pad-right"></span>Home Address <!--<span class="fa fa-pencil pad-right"></span>--></p>
-                                <blockquote>
+                                <p>
+                                    <span class="fa fa-envelope pad-right"></span>
+                                    <span *ngIf="!edit.email">
+                                        {{ email }} <span class="fa fa-pencil pad-right" (click)="edit.email=!edit.email; edit.save = true;"></span>
+                                    </span>
+                                    <input class="form-control"  *ngIf="edit.email" type="text" [(ngModel)]="email" />
+                                </p>
+                                <p>
+                                    <span class="fa fa-building pad-right"></span>
+                                    <span *ngIf="!edit.title">
+                                        {{ title }} at {{ company }} <span class="fa fa-pencil pad-right" (click)="edit.title=!edit.title; edit.save = true;"></span>
+                                    </span>
+                                    <span *ngIf="edit.title">
+                                        <input class="form-control"  *ngIf="edit.title" type="text" [(ngModel)]="title" /> at
+                                        <input class="form-control"  class="form-control"  *ngIf="edit.title" type="text" [(ngModel)]="company" />
+                                    </span>
+                                </p>
+                                <p><span class="fa fa-home pad-right"></span>Home Address <span class="fa fa-pencil pad-right" (click)="edit.address1=!edit.address1; edit.save = true;"></span></p>
+                                <blockquote *ngIf="!edit.address1">
                                     {{ address1 }} {{ address2 }}<br/>
                                     {{ city }}<br/>
                                     {{ state }}<br/>
@@ -31,6 +47,15 @@
                                     {{ country }}<br/>
                                     {{ phone }}
                                 </blockquote>
+                                <span *ngIf="edit.address1">
+                                    <input class="form-control"  placeholder="address" type="text" [(ngModel)]="address1" /> <br />
+                                    <input class="form-control"  placeholder="address" type="text" [(ngModel)]="address2" /> <br />
+                                    <input class="form-control"  placeholder="city" type="text" [(ngModel)]="city" /> <br />
+                                    <input class="form-control"  placeholder="state" type="text" [(ngModel)]="state" /> <br />
+                                    <input class="form-control"  placeholder="postalcode" type="text" [(ngModel)]="postalcode" /> <br />
+                                    <input class="form-control"  placeholder="country" type="text" [(ngModel)]="country" /> <br />
+                                    <input class="form-control"  placeholder="phone" type="text" [(ngModel)]="phone" />
+                                </span>
 
 
                             </div>
@@ -40,12 +65,25 @@
                             </ul>
                         </div>
                         <div class="row">
-                            <blockquote>
+                            <p>
+                                <span class="fa fa-magic pad-right"></span>Expertise
+                                <span class="fa fa-pencil pad-right" (click)="edit.bio=!edit.bio; edit.save = true;"></span>
+                            </p>
+                            <blockquote *ngIf="!edit.bio">
                                 <p>{{ bio }}</p>
                             </blockquote>
+                            <span *ngIf="edit.bio">
+                                <textarea class="form-control"  [(ngModel)]="bio" cols="30" rows="10"></textarea>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <button
+                                    (click)="updateProfile()"
+                                    class="btn btn-success btn-primary btn-lg float-right"
+                                    *ngIf="edit.save">Submit</button>
                         </div>
                     </div>
-                    <button class="btn btn-success btn-primary btn-lg float-right" *ngIf="edit.save">Submit</button>
+
                 </div>
             </div>
         
