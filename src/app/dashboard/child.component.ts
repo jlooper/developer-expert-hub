@@ -48,6 +48,9 @@ export class AccountComponent {
 
   user: Observable<firebase.User>;
 
+  success: string;
+  error: string;
+
   // currUser: FirebaseListObservable<any[]>;
   // activities: FirebaseListObservable<any[]>;
   // requests: FirebaseListObservable<any[]>;
@@ -147,47 +150,40 @@ export class AccountComponent {
           company: this.company,
           title: this.title,
           address1: this.address1,
-          address2: this.address2,
+          address2: this.address2 || '',
           city: this.city,
           state: this.state,
           country: this.country,
           postalcode: this.postalcode,
           phone: this.phone,
           bio: this.bio,
-          expertise: ['NativeScript']
+          expertise: this.expertise
       };
       console.log(data);
       console.log('/Profile/' + this.id + '/User');
-      this.db.object('/Profile/' + this.id + '/User/' + this.key)
-          .update(data)
-          .then(
-              (response) => {
-                  console.log(response);
-                  this.edit = {
-                      name: false,
-                      company: false,
-                      title: false,
-                      bio: false,
-                      expertise: false,
-                      email: false,
-                      address1: false,
-                      address2: false,
-                      city: false,
-                      state: false,
-                      postalcode: false,
-                      country: false,
-                      phone: false,
-                      save: false
-                  };
-                  alert('Update success');
-              },
-              (error) => {
-                  console.log('error', error);
-                  alert('Update error');
-              }
-          );
+      const db = this.db.object('/Profile/' + this.id + '/User/' + this.key)
+      db.update(data)
+      .then(
+        (success) => {
+              this.edit = {
+                name: false,
+                company: false,
+                title: false,
+                bio: false,
+                expertise: false,
+                email: false,
+                address1: false,
+                address2: false,
+                city: false,
+                state: false,
+                postalcode: false,
+                country: false,
+                phone: false,
+                save: false
+            };
+          this.success = 'Updated!';
+        });
   }
-
 }
 // activities
 @Component({
