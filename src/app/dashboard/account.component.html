@@ -16,9 +16,9 @@
                                 <p>
                                     <span class="fa fa-user pad-right"></span>
                                     <span *ngIf="!edit.name">
-                                        {{ name }} <span class="fa fa-pencil pad-right" (click)="edit.name=!edit.name"></span>
+                                        {{ name }} <span class="fa fa-pencil pad-right" (click)="edit.name=!edit.name; edit.save = true;"></span>
                                     </span>
-                                    <input *ngIf="edit.name" type="text" [(ngModel)]="name" (change)="edit.save = true" />
+                                    <input *ngIf="edit.name" type="text" [(ngModel)]="name" />
                                 </p>
                                 <p><span class="fa fa-envelope pad-right"></span>{{ email }} <span class="fa fa-pencil pad-right"></span></p>
                                 <p><span class="fa fa-building pad-right"></span>{{ title }} at {{ company }} <span class="fa fa-pencil pad-right"></span></p>
@@ -44,8 +44,11 @@
                                 <p>{{ bio }}</p>
                             </blockquote>
                         </div>
+                        <div class="row">
+                            <button class="btn btn-success btn-primary btn-lg float-right" *ngIf="edit.save">Submit</button>
+                        </div>
                     </div>
-                    <button class="btn btn-success btn-primary btn-lg float-right" *ngIf="edit.save">Submit</button>
+
                 </div>
             </div>
         
