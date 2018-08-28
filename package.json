@@ -24,8 +24,8 @@
     "angularfire2": "5.0.0-rc.11",
     "core-js": "^2.4.1",
     "firebase": "5.2.0",
-    "firebase-admin": "^4.2.1",
-    "firebase-functions": "^0.5.7",
+    "firebase-admin": "^5.12.1",
+    "firebase-functions": "^1.1.0",
     "rxjs": "^6.2.1",
     "rxjs-compat": "^6.2.1",
     "zone.js": "^0.8.14"
