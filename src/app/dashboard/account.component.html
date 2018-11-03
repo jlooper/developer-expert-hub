@@ -5,98 +5,113 @@
                 <h2>My Account</h2>
             </div>
         </div>
-        
-        
+
+
         <div class="row">
             <div class="col-lg-6">
-                    
-            <div *ngIf="success" class="alert alert-success text-center">{{success}}</div>
-            <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
-                    
-                <form #formData='ngForm' (ngSubmit)="updateProfile(formData)">
-                
+
+                <div *ngIf="success" class="alert alert-success text-center">{{success}}</div>
+                <div *ngIf="error" class="alert alert-danger text-center">{{error}}</div>
+
+                <form #formData='ngForm'>
+
                     <div class="panel panel-info">
-                    <div class="panel-heading"><h3>My Profile</h3></div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div>
-                                <p>
-                                    <span class="fa fa-user pad-right"></span>
-                                    <span *ngIf="!edit.name">
-                                        {{ name }} <span class="fa fa-pencil pad-right" (click)="edit.name=!edit.name; edit.save = true;"></span>
+                        <div class="panel-heading">
+                            <h3>My Profile</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div>
+                                    <p>
+                                        <span class="fa fa-user pad-right"></span>
+                                        <span *ngIf="!edit.name">
+                                            {{ name }} <span class="fa fa-pencil pad-right" (click)="edit.name=!edit.name; edit.save = true;"></span>
+                                        </span>
+                                        <input class="form-control" id="fname" name="fname" *ngIf="edit.name" type="text"
+                                            [(ngModel)]="fname" />
+                                        <input class="form-control" id="lname" name="lname" *ngIf="edit.name" type="text"
+                                            [(ngModel)]="lname" />
+                                    </p>
+                                    <p>
+                                        <span class="fa fa-envelope pad-right"></span>
+                                        <span *ngIf="!edit.email">
+                                            {{ email }} <span class="fa fa-pencil pad-right" (click)="edit.email=!edit.email; edit.save = true;"></span>
+                                        </span>
+                                        <input class="form-control" id="email" name="email" *ngIf="edit.email" type="text"
+                                            [(ngModel)]="email" />
+                                    </p>
+                                    <p>
+                                        <span class="fa fa-building pad-right"></span>
+                                        <span *ngIf="!edit.title">
+                                            {{ title }} at {{ company }} <span class="fa fa-pencil pad-right" (click)="edit.title=!edit.title; edit.save = true;"></span>
+                                        </span>
+                                        <span *ngIf="edit.title">
+                                            <input class="form-control" id="title" name="title" *ngIf="edit.title" type="text"
+                                                [(ngModel)]="title" /> at
+                                            <input class="form-control" id="company" name="company" class="form-control"
+                                                *ngIf="edit.title" type="text" [(ngModel)]="company" />
+                                        </span>
+                                    </p>
+                                    <p><span class="fa fa-home pad-right"></span>Home Address <span class="fa fa-pencil pad-right"
+                                            (click)="edit.address1=!edit.address1; edit.save = true;"></span></p>
+                                    <blockquote *ngIf="!edit.address1">
+                                        {{ address1 }} {{ address2 }}<br />
+                                        {{ city }}<br />
+                                        {{ state }}<br />
+                                        {{ postalcode }}<br />
+                                        {{ country }}<br />
+                                        {{ phone }}
+                                    </blockquote>
+                                    <span *ngIf="edit.address1">
+                                        <input class="form-control" id="address1" name="address1" placeholder="address"
+                                            type="text" [(ngModel)]="address1" /> <br />
+                                        <input class="form-control" id="address2" name="address2" placeholder="address"
+                                            type="text" [(ngModel)]="address2" /> <br />
+                                        <input class="form-control" id="city" name="city" placeholder="city" type="text"
+                                            [(ngModel)]="city" /> <br />
+                                        <input class="form-control" id="state" name="state" placeholder="state" type="text"
+                                            [(ngModel)]="state" /> <br />
+                                        <input class="form-control" id="postalcode" name="postalcode" placeholder="postalcode"
+                                            type="text" [(ngModel)]="postalcode" /> <br />
+                                        <input class="form-control" id="country" name="country" placeholder="country"
+                                            type="text" [(ngModel)]="country" /> <br />
+                                        <input class="form-control" id="phone" name="phone" placeholder="phone" type="text"
+                                            [(ngModel)]="phone" />
                                     </span>
-                                    <input class="form-control" id="fname" name="fname" *ngIf="edit.name" type="text" [(ngModel)]="fname" />
-                                    <input class="form-control" id="lname" name="lname"  *ngIf="edit.name" type="text" [(ngModel)]="lname" />
-                                </p>
-                                <p>
-                                    <span class="fa fa-envelope pad-right"></span>
-                                    <span *ngIf="!edit.email">
-                                        {{ email }} <span class="fa fa-pencil pad-right" (click)="edit.email=!edit.email; edit.save = true;"></span>
-                                    </span>
-                                    <input class="form-control" id="email" name="email" *ngIf="edit.email" type="text" [(ngModel)]="email" />
-                                </p>
-                                <p>
-                                    <span class="fa fa-building pad-right"></span>
-                                    <span *ngIf="!edit.title">
-                                        {{ title }} at {{ company }} <span class="fa fa-pencil pad-right" (click)="edit.title=!edit.title; edit.save = true;"></span>
-                                    </span>
-                                    <span *ngIf="edit.title">
-                                        <input class="form-control" id="title" name="title"  *ngIf="edit.title" type="text" [(ngModel)]="title" /> at
-                                        <input class="form-control" id="company" name="company"  class="form-control"  *ngIf="edit.title" type="text" [(ngModel)]="company" />
-                                    </span>
-                                </p>
-                                <p><span class="fa fa-home pad-right"></span>Home Address <span class="fa fa-pencil pad-right" (click)="edit.address1=!edit.address1; edit.save = true;"></span></p>
-                                <blockquote *ngIf="!edit.address1">
-                                    {{ address1 }} {{ address2 }}<br/>
-                                    {{ city }}<br/>
-                                    {{ state }}<br/>
-                                    {{ postalcode }}<br/>
-                                    {{ country }}<br/>
-                                    {{ phone }}
-                                </blockquote>
-                                <span *ngIf="edit.address1">
-                                    <input class="form-control" id="address1" name="address1"  placeholder="address" type="text" [(ngModel)]="address1" /> <br />
-                                    <input class="form-control" id="address2" name="address2"  placeholder="address" type="text" [(ngModel)]="address2" /> <br />
-                                    <input class="form-control" id="city" name="city"  placeholder="city" type="text" [(ngModel)]="city" /> <br />
-                                    <input class="form-control" id="state" name="state" placeholder="state" type="text" [(ngModel)]="state" /> <br />
-                                    <input class="form-control" id="postalcode" name="postalcode"  placeholder="postalcode" type="text" [(ngModel)]="postalcode" /> <br />
-                                    <input class="form-control" id="country" name="country"  placeholder="country" type="text" [(ngModel)]="country" /> <br />
-                                    <input class="form-control" id="phone" name="phone" placeholder="phone" type="text" [(ngModel)]="phone" />
-                                </span>
 
 
+                                </div>
+                                <p><span class="fa fa-gear pad-right"></span>Expertise</p>
+                                <ul *ngFor="let item of expertise">
+                                    <li>{{item}}</li>
+                                </ul>
                             </div>
-                            <p><span class="fa fa-gear pad-right"></span>Expertise</p>
-                            <ul *ngFor="let item of expertise">
-                                <li>{{item}}</li>
-                            </ul>
-                        </div>
-                        <div class="row">
-                            <p>
-                                <span class="fa fa-magic pad-right"></span>Bio
-                                <span class="fa fa-pencil pad-right" (click)="edit.bio=!edit.bio; edit.save = true;"></span>
-                            </p>
-                            <blockquote *ngIf="!edit.bio">
-                                <p>{{ bio }}</p>
-                            </blockquote>
-                            <span *ngIf="edit.bio">
-                                <textarea class="form-control" id="bio" name="bio"  [(ngModel)]="bio" cols="30" rows="10"></textarea>
-                            </span>
-                        </div>
-                        <div class="row">
-                            <!--<button
+                            <div class="row">
+                                <p>
+                                    <span class="fa fa-magic pad-right"></span>Bio
+                                    <span class="fa fa-pencil pad-right" (click)="edit.bio=!edit.bio; edit.save = true;"></span>
+                                </p>
+                                <blockquote *ngIf="!edit.bio">
+                                    <p>{{ bio }}</p>
+                                </blockquote>
+                                <span *ngIf="edit.bio">
+                                    <textarea class="form-control" id="bio" name="bio" [(ngModel)]="bio" cols="30" rows="10"></textarea>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <!--<button
                                     (click)="updateProfile()"
                                     class="btn btn-success btn-primary btn-lg float-right"
                                     *ngIf="edit.save">Submit</button>-->
-                            <button *ngIf="edit.save" type="submit" class="btn btn-success btn-primary btn-lg float-right">Submit</button>
+                                <button (click)="updateProfile()" type="button" *ngIf="edit.save" class="btn btn-success btn-primary btn-lg float-right">Submit</button>
 
+                            </div>
                         </div>
-                    </div>
 
-                </div>
+                    </div>
                 </form>
             </div>
-        
+
             <!--div *ngIf="(activities | async)?.length > 0" class="col-lg-6">
                 <div class="panel panel-success">
                     <div class="panel-heading"><h3>My Activities</h3></div>
