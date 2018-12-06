@@ -112,7 +112,7 @@ export class AccountComponent {
             data => {
                 this.key = data[0].key;
             }
-        )
+        );
         this.currUser.valueChanges().subscribe(queriedItems => {
             let i = true;
             console.log(queriedItems);
