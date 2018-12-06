@@ -7,9 +7,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/observable';
 
 @Component({
-  templateUrl: 'signup.component.html'
+  templateUrl: 'signup.component.html',
 })
-
 export class SignupComponent {
   public error: any;
   public expertise: any = [];
@@ -36,16 +35,13 @@ export class SignupComponent {
 
   user: Observable<firebase.User>;
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private db: AngularFireDatabase,
-    private router: Router) {
+  constructor(private afAuth: AngularFireAuth, private db: AngularFireDatabase, private router: Router) {
     this.user = afAuth.authState;
   }
 
   appendExpertise(status, value) {
     if (status) {
-      this.expertise.push(value)
+      this.expertise.push(value);
     } else {
       for (let i = 0; i < this.expertise.length; i++) {
         if (this.expertise[i] === value) {
@@ -62,7 +58,7 @@ export class SignupComponent {
     const storageUrl = 'images/';
     const name = `img-${Date.now()}.jpg`;
     const storageRef = firebase.storage().ref(storageUrl + name);
-    storageRef.put(file).then(function (snapshot) {
+    storageRef.put(file).then(function(snapshot) {
       // get the download URL
       localStorage.setItem('currFile', snapshot.downloadURL);
     });
@@ -70,23 +66,33 @@ export class SignupComponent {
 
   onSubmit(formData) {
     if (formData.valid) {
-      this.afAuth.auth.createUserWithEmailAndPassword(
-        formData.value.email, formData.value.password
-      ).then(
-        (success) => {
-          this.createUserProfile((<any>success).uid,
-            formData.value.fname, formData.value.lname,
-            formData.value.title, formData.value.company,
-            formData.value.bio, this.expertise,
-            formData.value.address1, formData.value.address2,
-            formData.value.city, formData.value.state, formData.value.postalcode,
-            formData.value.country, formData.value.phone,
-            formData.value.website, formData.value.twitter,
-            formData.value.github)
-        }).catch(
-          (err) => {
-            this.error = err.message;
-          })
+      this.afAuth.auth
+        .createUserWithEmailAndPassword(formData.value.email, formData.value.password)
+        .then(success => {
+          console.log(success.user.uid);
+          this.createUserProfile(
+            success.user.uid,
+            formData.value.fname,
+            formData.value.lname,
+            formData.value.title,
+            formData.value.company,
+            formData.value.bio,
+            this.expertise,
+            formData.value.address1,
+            formData.value.address2,
+            formData.value.city,
+            formData.value.state,
+            formData.value.postalcode,
+            formData.value.country,
+            formData.value.phone,
+            formData.value.website,
+            formData.value.twitter,
+            formData.value.github
+          );
+        })
+        .catch(err => {
+          this.error = err.message;
+        });
     } else {
       this.error = 'Your form is invalid';
     }
@@ -109,35 +115,36 @@ export class SignupComponent {
     phone,
     website,
     twitter,
-    github) {
-    const data = this.db.list('/Profile/' + uid + '/User')
-    data.push({
-      fname: fname,
-      lname: lname,
-      title: title,
-      company: company,
-      expertise: expertise,
-      image: localStorage.getItem('currFile'),
-      bio: bio,
-      member: false,
-      date: firebase.database.ServerValue.TIMESTAMP,
-      address1: address1,
-      address2: address2,
-      city: city,
-      state: state,
-      postalcode: postalcode,
-      country: country,
-      phone: phone,
-      website: website,
-      twitter: twitter,
-      github: github
-    })
-      .then(
-        (success) => {
-          // clear localstorage
-          localStorage.removeItem('currFile');
-          this.router.navigate(['/success']);
-        });
+    github
+  ) {
+    const data = this.db.list('/Profile/' + uid + '/User');
+    data
+      .push({
+        fname: fname,
+        lname: lname,
+        title: title,
+        company: company,
+        expertise: expertise,
+        image: localStorage.getItem('currFile'),
+        bio: bio,
+        member: false,
+        date: firebase.database.ServerValue.TIMESTAMP,
+        address1: address1,
+        address2: address2,
+        city: city,
+        state: state,
+        postalcode: postalcode,
+        country: country,
+        phone: phone,
+        website: website,
+        twitter: twitter,
+        github: github,
+      })
+      .then(success => {
+        // clear localstorage
+        localStorage.removeItem('currFile');
+        this.router.navigate(['/success']);
+      });
   }
 }
 
@@ -147,9 +154,8 @@ export class SignupComponent {
  *
  * */
 
-
 @Component({
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
 })
 export class LoginComponent {
   public error: any;
@@ -158,33 +164,26 @@ export class LoginComponent {
   password: string;
   message: string;
 
-  constructor(
-    public db: AngularFireDatabase,
-    public afAuth: AngularFireAuth,
-    private router: Router
-  ) {
-      // check if have a cookie login
-      afAuth.authState.subscribe(
-      (user) => {
-          if (user !== null) {
-              const u = <any>user;
-              this.getUser(u.uid);
-          }
-      });
+  constructor(public db: AngularFireDatabase, public afAuth: AngularFireAuth, private router: Router) {
+    // check if have a cookie login
+    afAuth.authState.subscribe(user => {
+      if (user !== null) {
+        const u = <any>user;
+        this.getUser(u.uid);
+      }
+    });
   }
 
   public onSubmit(formData) {
     if (formData.valid) {
-      this.afAuth.auth.signInWithEmailAndPassword(
-        formData.value.email,
-        formData.value.password
-      )
+      this.afAuth.auth
+        .signInWithEmailAndPassword(formData.value.email, formData.value.password)
         .then((success: firebase.auth.UserCredential) => {
           this.getUser(success.user.uid);
         })
-        .catch((err) => {
+        .catch(err => {
           this.error = err.message;
-        })
+        });
     } else {
       this.error = 'Your form is invalid';
     }
@@ -197,34 +196,32 @@ export class LoginComponent {
       if (this.member) {
         this.router.navigate(['/dashboard']);
       } else {
-        this.error = 'You have not yet been approved as a member of this group.'
+        this.error = 'You have not yet been approved as a member of this group.';
       }
     });
   }
 }
 
 @Component({
-  templateUrl: 'resetpassword.component.html'
+  templateUrl: 'resetpassword.component.html',
 })
-
 export class ResetpassComponent {
   public error: any;
   email: string;
   message: string;
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth) {}
 
   onSubmit(formData) {
     if (formData.valid) {
-      this.afAuth.auth.sendPasswordResetEmail(
-        formData.value.email
-      ).then(
-        (success) => {
-          this.message = 'An email with instructions has been sent'
-        }).catch(
-          (err) => {
-            this.error = err.message;
-          })
+      this.afAuth.auth
+        .sendPasswordResetEmail(formData.value.email)
+        .then(success => {
+          this.message = 'An email with instructions has been sent';
+        })
+        .catch(err => {
+          this.error = err.message;
+        });
     } else {
       this.error = 'Your form is invalid';
     }
@@ -232,7 +229,6 @@ export class ResetpassComponent {
 }
 
 @Component({
-  templateUrl: 'success.component.html'
+  templateUrl: 'success.component.html',
 })
-
-export class SuccessComponent { }
+export class SuccessComponent {}
