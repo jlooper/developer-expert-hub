@@ -104,9 +104,11 @@ export class AccountComponent {
         this.requests = this.db.list('/Profile/' + this.id + '/Requests');
         this.checkins = this.db.list('/Profile/' + this.id + '/Checkins');
         this.currUser = this.db.list('/Profile/' + this.id + '/User');
-        this.currUser.snapshotChanges().subscribe(data => {
-          this.key = data[0].key;
-        });
+        this.currUser.snapshotChanges().subscribe(
+            data => {
+                this.key = data[0].key;
+            }
+        );
         this.currUser.valueChanges().subscribe(queriedItems => {
           let i = true;
           console.log(queriedItems);
