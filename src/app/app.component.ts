@@ -8,7 +8,6 @@ import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'root-app',
-  styleUrls: ['app.component.css'],
   templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
